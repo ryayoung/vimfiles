@@ -1,3 +1,4 @@
+(NOTE: If viewing from Github, please switch to raw or blame view)
 # CHEAT SHEET FOR KEY MAPPINGS
 - Use the command, "<Space>cheat" to quickly access this file at any time.
 - The following commands are defined in vimrc and maps.vim. NOTE: 4 of the following maps conflict with Vim commands you're used to: mm, mM, mn, mN
