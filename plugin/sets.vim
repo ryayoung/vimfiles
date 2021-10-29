@@ -20,6 +20,7 @@ set shiftwidth=4 "Defines how far to shift text when you press >> or <<, or when
 "set backspace=2 "allows you to backspace to prev line 
 set backspace=indent,eol,start "Allows you to backspace over everything including auto inserted indents, line breaks, and start of insert
 
+"GENERAL:----------------------------------------------------------
 set nowrap "disables wrapping. I enable it again for markdown and txt files below
 set nohlsearch "removes highlighting after search
 set hidden "allows buffers to remain open in background without saving
@@ -35,6 +36,7 @@ set encoding=utf-8 "vim defaults to latin1, but will change based on locale of y
 "set noswapfile "Swap files store changes made to buffer in case of crash. They're annoying. Instead, I store swp files in my vimfiles/tmp directory
 "set autochdir "sets directory to that of current file. (disabled because I instead use :cd %:p:h (change local dir to current window) and :Vex (explore files in current file's dir). Both are remapped in vimrc)
     
+"FILETYPE DEPENDENT:-----------------------------------------------
 augroup htmlsets
     autocmd!
     autocmd FileType html set tabstop=2
@@ -44,7 +46,6 @@ augroup htmlsets
     autocmd FileType html set shiftwidth=2
     "autocmd FileType html set background=light
 augroup END
-
 
 augroup sqlsets
     autocmd!

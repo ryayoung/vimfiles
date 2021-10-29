@@ -1,6 +1,5 @@
 "Quit
 nnoremap <Leader>q :q<CR>
-
 "Save
 nnoremap <Leader>s :w<CR>
 "Save and source file. Use this when editing vimrc for your changes to take effect
@@ -12,6 +11,22 @@ nnoremap <Leader>t :terminal powershell<CR>
 nnoremap <Leader>cur :lcd %:p:h<CR>
 "Change GLOBAL working directory to current file
 nnoremap <Leader>cg :cd %:p:h<CR>
+
+"Paste from sys clipboard
+nnoremap <Leader>pa "+p
+"Copy to sys clipboard
+vnoremap <Leader>co "+y
+
+"shift visual lines up and down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+"Quickly set font size
+nnoremap <Leader>f :call SetSmallerFont()<CR>:echo GetFontSize()<CR>
+nnoremap <Leader>F :call SetLargerFont()<CR>:echo GetFontSize()<CR>
+
+"Exit closing brackets/braces/etc with TAB
+inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
 
 "WINDOW MANIPULATION:----------------------------------------------
 "Move cursor to adjacent windows
@@ -32,27 +47,13 @@ nnoremap <Leader>] :resize +15<CR>
 "Access window commands not already mapped here. This maps to Ctrl-w
 nnoremap <Leader>w <C-w>
 
-"Paste from sys clipboard
-nnoremap <Leader>pa "+p
-"Copy to sys clipboard
-vnoremap <Leader>co "+y
-
-"shift visual lines up and down
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-"Quickly set font size
-nnoremap <Leader>f :call SetSmallerFont()<CR>:echo GetFontSize()<CR>
-nnoremap <Leader>F :call SetLargerFont()<CR>:echo GetFontSize()<CR>
-
-"Exit closing brackets/braces/etc with TAB
-inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
-
 "SMART MARKS:------------------------------------------------------
 nnoremap mm mM:echo "GLOBAL MARK 1 SET"<CR>
 nnoremap mM mK:echo "GLOBAL MARK 2 SET"<CR>
 nnoremap mn mn:echo "LOCAL MARK 1 SET"<CR>
 nnoremap mN mb:echo "LOCAL MARK 2 SET"<CR>
+nnoremap <Leader>m 'M:call ToggleSmartMarkGlobal()<CR>
+nnoremap <Leader>n 'n:call ToggleSmartMarkLocal()<CR>
 
 "FILETYPE DEPENDENT:-----------------------------------------------
 augroup htmlmaps

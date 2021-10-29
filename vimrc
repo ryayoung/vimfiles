@@ -1,7 +1,6 @@
 syntax on
 filetype plugin on
 set directory^=$HOME/vimfiles/tmp//
-"Here is a change
 
 "PLUG:-------------------------------------------------------------
 call plug#begin('~/vimfiles/plugged')
@@ -76,9 +75,18 @@ let g:lightline = {'colorscheme': 'gruvbox'}
 set laststatus=2 "Needed to display lightline"
 set noshowmode "Mode is already displayed by lightline, so we can hide it"
 
-"QUICK ACCESS:-----------------------------------------------------
+"QUICK ACCESS FOR EVERYONE:----------------------------------------
 "Directories
 nnoremap <Leader>.home :cd ~<CR>
+nnoremap <Leader>.files :cd ~\vimfiles<CR>
+"Files
+nnoremap <Leader>.vrc :e $MYVIMRC<CR>
+nnoremap <Leader>.sets :e ~\vimfiles\plugin\sets.vim<CR>
+nnoremap <Leader>.maps :e ~\vimfiles\plugin\maps.vim<CR>
+nnoremap <Leader>.cheat :e ~\vimfiles\CheatSheet.md<CR>
+
+"PERSONAL QUICK ACCESS: (Delete these and make your own!)----------
+"Directories
 nnoremap <Leader>.ryayoung :cd ~\ryayoung<CR>
 nnoremap <Leader>.dw :cd ~\ryayoung\data-warehousing<CR>
 nnoremap <Leader>.auto :cd ~\ryayoung\karve-automation<CR>
@@ -88,12 +96,7 @@ nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1<CR>
 nnoremap <Leader>.www :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\COMP\ 3410\ WWW\ Programming<CR>
 nnoremap <Leader>.pm :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\INFO\ 3340\ Project\ Management<CR>
 nnoremap <Leader>.mgmt :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\MGMT\ 3000\ Policy\ Strategy<CR>
-nnoremap <Leader>.files :cd ~\vimfiles<CR>
 "Files
-nnoremap <Leader>.vrc :e $MYVIMRC<CR>
-nnoremap <Leader>.sets :e ~\vimfiles\plugin\sets.vim<CR>
-nnoremap <Leader>.maps :e ~\vimfiles\plugin\maps.vim<CR>
-nnoremap <Leader>.cheat :e ~\vimfiles\CheatSheet.md<CR>
 nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 
 "NOT USED:---------------------------------------------------------
