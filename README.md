@@ -15,4 +15,4 @@ Here's my entire vim configuration. I use Plug as my plugin manager, and my &lt;
 - [```vimrc```](vimrc): Your main configuration file for Vim. Mine contains plugins, configuration for plugins, and quick access mappings.
 - [```sets.vim```](plugin/sets.vim): Secondary configuration file with all "set" type commands. (This works just like a vimrc. I keep it separate to stay organized)
 - [```maps.vim```](plugin/maps.vim): Secondary configuration file with all "map" type commands. (This works just like a vimrc. I keep it separate to stay organized)
-- [```CheatSheet.md```](CheatSheet.md): (Note: View this file in raw or blame mode if you're on Github to prevent it from rendering.)
+- [```CheatSheet.md```](CheatSheet.md): (NOTE: View this in raw or blame mode if you're on Github to prevent it from rendering.)
