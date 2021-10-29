@@ -1,6 +1,7 @@
 syntax on
 filetype plugin on
 set directory^=$HOME/vimfiles/tmp//
+"Here is a change
 
 "PLUG:-------------------------------------------------------------
 call plug#begin('~/vimfiles/plugged')
