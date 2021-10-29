@@ -1,6 +1,9 @@
 syntax on
 filetype plugin on
-set directory^=$HOME/vimfiles/tmp//
+set directory^=$HOME/vimfiles/tmp// "If /tmp exists, Vim will place all your swap files there, so your working directory stays clean.
+
+"SET LEADER KEY:---------------------------------------------------
+let mapleader = " "
 
 "PLUG:-------------------------------------------------------------
 call plug#begin('~/vimfiles/plugged')
@@ -20,15 +23,11 @@ call plug#end()
 
 "LINE NUMBERING:---------------------------------------------------
 set number "enable line numbering
-augroup numbertoggle
-    "Number mode changes between insert and normal mode
+augroup numbertoggle "Number mode changes between insert and normal mode
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
-
-"SET LEADER KEY:---------------------------------------------------
-let mapleader = " "
 
 "NETRW:------------------------------------------------------------
 let g:netrw_banner=0
