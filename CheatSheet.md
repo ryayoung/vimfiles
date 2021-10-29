@@ -9,6 +9,8 @@
 # <Leader>q         Quit     
 # <Leader>s         Save      
 # <Leader>2         Save and source file (use when editing vimrc for changes to take effect)
+# <Leader>a         Open new split with empty file
+# <Leader>A         Open new tab with empty file (swap tabs with "gt")
 # <Leader>t         Open Powershell in current directory
 # <Leader>cur       Change working dir. of CURRENT WINDOW to current file
 # <Leader>cg        Change GLOBAL working dir. to current file
@@ -42,3 +44,15 @@ These are for my Smart Marks plugin: (see smartmarks.vim for explanation on how 
 # <C-k>,            Expand an Emmet abbreviation in html or css file (See Emmet documentation)
 # <Tab>             When pressed in front of a closing ), ", ], }, you'll exit the enclosure
 # <Tab>             Auto pair braces/parentheses. (See PearTree documentation)
+
+# ------- QUICK ACCESS -------
+Files:
+# <Leader>?         Open this cheat sheet in a new split
+# <Leader>vrc       vimrc in current window
+# <Leader>maps      maps.vim in current window
+# <Leader>sets      sets.vim in current window
+Directories:
+# <Leader>.home     Change working dir. to home
+# <Leader>.files    Change working dir. to vimfiles
+
+

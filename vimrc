@@ -83,7 +83,7 @@ nnoremap <Leader>.files :cd ~\vimfiles<CR>
 nnoremap <Leader>.vrc :e $MYVIMRC<CR>
 nnoremap <Leader>.sets :e ~\vimfiles\plugin\sets.vim<CR>
 nnoremap <Leader>.maps :e ~\vimfiles\plugin\maps.vim<CR>
-nnoremap <Leader>.cheat :e ~\vimfiles\CheatSheet.md<CR>
+nnoremap <Leader>? <C-w>s:e ~\vimfiles\CheatSheet.md<CR>
 
 "PERSONAL QUICK ACCESS: (Delete these and make your own!)----------
 "Directories

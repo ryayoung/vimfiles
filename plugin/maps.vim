@@ -4,6 +4,10 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>s :w<CR>
 "Save and source file. Use this when editing vimrc for your changes to take effect
 nnoremap <Leader>2 :w<bar> :source %<CR>
+"Open new split with empty file
+nnoremap <Leader>a :new<CR>
+"Open new tab in vim (swap between tabs with "gt")
+nnoremap <Leader>A :tabnew<CR>
 
 "Open Powershell
 nnoremap <Leader>t :terminal powershell<CR>
