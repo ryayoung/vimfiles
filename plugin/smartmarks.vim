@@ -1,6 +1,9 @@
+" Author: Ryan Young
+" Last modified: 10-30-21
+
 "SMART GLOBAL MARKS! WAHOOOO!
 
-"This is an original idea, in which I create a map that actually re-maps itself each time it's called. Sweet!
+"This is an original idea, in which I create a map that actually re-maps itself each time it's called.
 
 "Marks, while extremely useful, are a bit cumbersome to use. Do you ever forget which marks map to which places, accidentally try to use a local mark globally, create too many marks and lose track of them, or find that the syntax is too cumbersome for quickly switching between two marks?
 
