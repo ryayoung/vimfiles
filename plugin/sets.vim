@@ -10,7 +10,7 @@ set guioptions-=T "remove toolbar
 set guioptions-=r "remove right hand scroll bar
 set guioptions-=L "remove right hand scroll bar
 
-set autoread "automatically refresh file that's been updated
+set autoread "automatically refresh open files that have been updated elsewhere
 
 set splitright "When opening a vertical split, it will open to the right instead of left
 set splitbelow "When opening a horizontal split, it will open to the bottom instead of top
@@ -27,17 +27,17 @@ set shiftwidth=4 "Defines how far to shift text when you press >> or <<, or when
 set backspace=indent,eol,start "Allows you to backspace over everything including auto inserted indents, line breaks, and start of insert
 
 "GENERAL:----------------------------------------------------------
-set nowrap "disables wrapping. I enable it again for markdown and txt files below
+set nowrap "disables wrapping. I enable it again for markdown and txt files in /ftplugin
 set nohlsearch "removes highlighting after search
-set hidden "allows buffers to remain open in background without saving
-set scrolloff=4 "scroll starts when you're x lines from edge
+set hidden "allows buffers to remain open in background without saving, so if multiple unsaved files are open, you can quit one without saving, and vim won't make you save it until you close the program.
+set scrolloff=4 "scroll starts when you're x lines from top or bottom of page
 set ignorecase "All searches are case INsensitive
 set smartcase "when this and ignorecase are turned on, search is case sensitive unless uppercase is used in search
-set nobackup "Vim makes backups of SAVED files. This is different from swap files, which store UNSAVED changes
+set nobackup "Disables backup files. Vim makes backups of SAVED files. This is different from swap files, which store UNSAVED changes
 set undodir=~/vimfiles/undodir "Defines the directory in which Vim stores your undo file
 set undofile "Tells vim to create an undo file. In this case, it gets stored in the dir. defined above
 set incsearch "When searching with "/", results will be highlighted AS you're searching, rather than waiting till you press enter
-set encoding=utf-8 "vim defaults to latin1, but will change based on locale of your environment
+set encoding=utf-8 "vim defaults to latin1, but will change based on locale of your environment.
 "set exrc "uses vimrc from directory you open file from                                            
 "set noswapfile "Swap files store changes made to buffer in case of crash. They're annoying. Instead, I store swp files in my vimfiles/tmp directory
 "set autochdir "sets directory to that of current file. (disabled because I instead use :cd %:p:h (change local dir to current window) and :Vex (explore files in current file's dir). Both are remapped in vimrc)
