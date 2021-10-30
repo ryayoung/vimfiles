@@ -41,21 +41,4 @@ set encoding=utf-8 "vim defaults to latin1, but will change based on locale of y
 "set exrc "uses vimrc from directory you open file from                                            
 "set noswapfile "Swap files store changes made to buffer in case of crash. They're annoying. Instead, I store swp files in my vimfiles/tmp directory
 "set autochdir "sets directory to that of current file. (disabled because I instead use :cd %:p:h (change local dir to current window) and :Vex (explore files in current file's dir). Both are remapped in vimrc)
-    
-"FILETYPE DEPENDENT:-----------------------------------------------
-augroup htmlsets
-    autocmd!
-    "autocmd FileType html set background=light
-augroup END
-
-augroup sqlsets
-    autocmd!
-    "autocmd FileType sql set background=light
-augroup END
-
-augroup mdsets
-    autocmd!
-    autocmd FileType markdown set wrap linebreak
-    autocmd FileType markdown set spell
-augroup END
 

@@ -81,15 +81,6 @@ nnoremap mN mb:echo "LOCAL MARK 2 SET"<CR>
 nnoremap <Leader>m 'M:call ToggleSmartMarkGlobal()<CR>
 nnoremap <Leader>n 'n:call ToggleSmartMarkLocal()<CR>
 
-"FILETYPE DEPENDENT:-----------------------------------------------
-augroup htmlmaps
-    autocmd!
-augroup END
-
-augroup sqlmaps
-    autocmd!
-augroup END
-
 
 "Function to resize window proportionally (Ex: 33%, 50%, etc.)
 "Not currentl in use. To use it, re-map window resize commands
