@@ -1,6 +1,6 @@
+" Author: Ryan Young
 " Last modified: 10-30-21
-syntax on
-"Last Updated: 10/10/21
+
 "Main configuration file for vim. Many more commands can be found in sets.vim
 "and maps.vim inside the plugin folder.
 syntax on "Enables syntax highlighting. Very important
@@ -165,9 +165,10 @@ augroup END
 
 autocmd BufWritePre,FileWritePre * call UpdateLastModified()
 fun! UpdateLastModified()
-    if &filetype == "csv"
+    if &modified == 0 "Only update if changes have been made
         return
-    elseif &filetype == "vim"
+    endif
+    if &filetype == "vim"
         let g:Comment='" ' | let g:EndComment=""
     endif
     let save_cursor = getcurpos()
@@ -191,7 +192,7 @@ endfun
 
 autocmd BufRead,BufNewFile,FocusGained * call CreateFirstHeader()
 fun! CreateFirstHeader()
-    if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != ""
+    if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != "" && &filetype != "csv"
         call CreateHeader()
         execute "normal! o"
     endif
