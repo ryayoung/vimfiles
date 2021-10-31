@@ -52,6 +52,9 @@ nnoremap <Leader>4 :call CreateHeader()<CR>
 " CHANGE WINDOWS ACCENTS
 nnoremap <Leader>5 :call ChangeAccent()<CR>
 
+" COMMIT TO GITHUB
+nnoremap <Leader>cmt :terminal powershell<CR>git add .<CR>git commit -m ""<Left>
+
 
 fun! ChangeAccent(color="none")
 

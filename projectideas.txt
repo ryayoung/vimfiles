@@ -1,0 +1,10 @@
+Author: Ryan Young
+Last modified: 10-31-21
+
+1. Create plugin to auto push to github
+- Switch working directory to current file
+- Open powershell inside vim
+- Add, commit, and push
+
+
+

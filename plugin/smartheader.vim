@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 10-30-21
+" Last modified: 10-31-21
 
 let Comment = '" '
 let EndComment = ''
@@ -37,11 +37,10 @@ fun! UpdateLastModified()
     call setpos('.', save_cursor)
 endfun
 
-autocmd BufRead,BufNewFile,FocusGained * call CreateFirstHeader()
+autocmd BufRead,BufNewFile,FocusGained,BufWritePre * call CreateFirstHeader()
 fun! CreateFirstHeader()
     if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != "" && &filetype != "csv"
         call CreateHeader()
-        execute "normal! o" | execute "normal! dd"
     endif
 endfun
 
