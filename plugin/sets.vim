@@ -1,6 +1,9 @@
 " Author: Ryan Young
 " Last modified: 10-30-21
 
+set shell=powershell
+set shellcmdflag=-command
+
 set guifont=Consolas:h8 "set font
 
 set lines=100 columns=125 "sets size of window that opens. (lines is set to a very high number so it will just always open at the height of your screen)

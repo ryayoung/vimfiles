@@ -1,5 +1,6 @@
 " Author: Ryan Young
-" Last modified: 10-30-21
+" Last modified: 10-31-21
+
 "Save
 nnoremap <Leader>s :w<CR>
 "Quit current window
@@ -47,6 +48,37 @@ nnoremap <Leader>3 @q
 
 "Create header at the top of the file with name and date
 nnoremap <Leader>4 :call CreateHeader()<CR>
+
+" CHANGE WINDOWS ACCENTS
+nnoremap <Leader>5 :call ChangeAccent()<CR>
+
+
+fun! ChangeAccent(color="none")
+
+    if a:color == "light"
+        let l:accent = "0xffbce5f2" "Light
+    elseif a:color == "dark"
+        let l:accent = "0xff2f3032" "Dark
+    elseif strftime('%H') > 20 || strftime('%H') < 5
+        let l:accent = "0xff2f3032" "Dark
+        "let l:accent = "0xffbce5f2" "Light
+        "let l:afterglow = "0xc4282828"
+        "let l:inactive = "0xc4282828"
+    else
+        let l:accent = "0xffbce5f2" "Light
+        "let l:inactive = "0xc4282828"
+        "let l:afterglow = "0xc42e5bc"
+    endif
+    
+    "Change accent color
+    execute 'silent ! reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "AccentColorMenu" /t REG_DWORD /d ' . l:accent .' /f'
+    "execute 'silent ! reg add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "AccentColor" /t REG_DWORD /d ' . l:accent .' /f'
+    "execute 'silent ! reg add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "AccentColorInactive" /t REG_DWORD /d ' . l:inactive .' /f'
+
+    "execute 'silent ! reg add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "ColorizationAfterglow" /t REG_DWORD /d ' . l:afterglow .' /f'
+    "execute 'silent ! reg add "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "ColorizationColor" /t REG_DWORD /d ' . l:afterglow .' /f'
+endfun
+
 
 "WINDOW MANIPULATION:----------------------------------------------
 "Move cursor to adjacent windows

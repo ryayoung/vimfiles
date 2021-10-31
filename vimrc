@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 10-30-21
+" Last modified: 10-31-21
 
 "Main configuration file for vim. Many more commands can be found in sets.vim
 "and maps.vim inside the plugin folder.
@@ -60,7 +60,7 @@ let g:gruvbox_contrast_light='soft'
 let g:gruvbox_contrast_dark='soft'
 "Sets background based on hour of the day in military time. Adjust this number
 "to change when it gets dark.
-if strftime('%H') > 20
+if strftime('%H') > 20 || strftime('%H') < 5
     set background=dark
 else
     set background=light
