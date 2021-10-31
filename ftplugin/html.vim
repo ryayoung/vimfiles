@@ -24,3 +24,5 @@ nnoremap <Leader>,d1 vf>d<Esc>
 " Deletes the current AND closing tag. Use when hovering over '<'
 nnoremap <Leader>,d2 i`<Esc>lvf>d<Esc>hf<vf>d<Esc>F`x
 
+iabbrev <!-- <!-- --><Left><Left><Left><Left>
+iabbrev <em> <em></em><Left><Left><Left><Left><Left>

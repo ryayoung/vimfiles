@@ -90,7 +90,7 @@ nnoremap <Leader>cn :Files<CR>
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-k>'
-
+ 
 "LIGHTLINE:--------------------------------------------------------
 let g:lightline = {}
 let g:lightline = {'colorscheme': 'gruvbox'}
@@ -108,7 +108,7 @@ nnoremap <Leader>.vrc :e $MYVIMRC<CR>
 nnoremap <Leader>.sets :e ~\vimfiles\plugin\sets.vim<CR>
 nnoremap <Leader>.maps :e ~\vimfiles\plugin\maps.vim<CR>
 "Open cheat sheet in new horizontal split, instead of current window
-nnoremap <Leader>? <C-w>s:e ~\vimfiles\CheatSheet.txt<CR>
+nnoremap <Leader>? <C-w>s:view ~\vimfiles\CheatSheet.txt<CR>
 
 "PERSONAL QUICK ACCESS: (Delete these and make your own!)----------
 "Directories
@@ -133,75 +133,28 @@ nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 "let g:ctrlp_open_new_file = 't'
 "let g:ctrlp_working_path_mode = 'rw'
 
-"FUNCTIONS:--------------------------------------------------------
-function! UpdateHeader()
-    if &filetype == "csv"
-        return
-    endif
-    let save_cursor = getcurpos()
 
-    "if search("Last Updated: ")
-    "g/Last Updated: ..\/..\/../s/..\/..\/../\=strftime("%m\/%d\/%y")/g
-    let search_result = search("syn... on", "w")
-
-    call setpos('.', save_cursor)
-endfunction
-
-"VARIABLES:-------------------------------------------------------
-let Comment = '" '
-let EndComment = ''
-"Possible bug: test comments that include a forward slash
-augroup comment
-    au!
-    au WinEnter,BufNewFile,FocusGained,WinEnter, * let Comment='" ' | let EndComment=""
-    au BufRead,BufNewFile,FocusGained,WinEnter *.inc,*.ihtml,*.html,*.tpl,*.class,*.xml let Comment="<!-- " | let EndComment=" -->"
-    au BufRead,BufNewFile,FocusGained,WinEnter *.css,*.c,*.h let Comment="/* " | let EndComment=" */"
-    au BufRead,BufNewFile,FocusGained,WinEnter *.sh,*.pl,*.tcl,*.py,*.rb let Comment="# " | let EndComment=""
-    au BufRead,BufNewFile,FocusGained,WinEnter *.cc,*.cpp,*.php,*.cxx,*.js,*.java let Comment="// " | let EndComment=""
-    au BufRead,BufNewFile,FocusGained,WinEnter *.c,*.h let Comment="/* " | let EndComment=" */"
-    au BufRead,BufNewFile,FocusGained,WinEnter *.vb let Comment="' " | let EndComment=""
-    au BufRead,BufNewFile,FocusGained,WinEnter *.txt,*.md let Comment="" | let EndComment=""
-    au WinEnter,Filetype vim let Comment='" ' | let EndComment=""
-augroup END
-
-autocmd BufWritePre,FileWritePre * call UpdateLastModified()
-fun! UpdateLastModified()
-    if &modified == 0 "Only update if changes have been made
-        return
-    endif
-    "if &filetype == "vim"
-        "let g:Comment='" ' | let g:EndComment=""
-    "endif
-    let save_cursor = getcurpos()
-    let title = "Last modified: "
-    let time = strftime("%m-%d-%y")
-
-    let line = search(g:Comment . title . "..-..-..", "w")
-    if line != 0 
-        exe line . "g/" . title . "/s/.*/" . g:Comment . title . time . g:EndComment
+" FUNCTIONS:-------------------------------------------------------
+fun! AnyBuffersModified()
+    let l:numModified = 0
+    let l:numUnnamedModified = 0
+    for i in range(1, bufnr('$'))
+        let l:numModified = l:numModified + getbufvar(i, "&mod")
+        if getbufvar(i, "&mod") == 1 
+            if bufname(i) == ""
+                let l:numUnnamedModified = l:numUnnamedModified + 1
+            else
+                echom bufname(i)
+            endif
+        endif
+    endfor
+    if l:numUnnamedModified > 0
+        echom "Unnamed buffer(s) modified: (" . l:numUnnamedModified . ")"
     endif
 
-    call setpos('.', save_cursor)
-endfun
-
-autocmd BufRead,BufNewFile,FocusGained * call CreateFirstHeader()
-fun! CreateFirstHeader()
-    if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != "" && &filetype != "csv"
-        call CreateHeader()
-        execute "normal! o" | execute "normal! dd"
+    if l:numModified > 0
+        return 1
+    else
+        return 0
     endif
 endfun
-
-fun! CreateHeader()
-    let title1 = "Author: " . g:name
-    let title2 = "Last modified: "
-    let time = strftime("%m-%d-%y")
-    execute "normal! ggO" | execute "normal! cc" . g:Comment . title1 . g:EndComment
-    execute "normal! o" | execute "normal! cc" . g:Comment . title2 . time . g:EndComment
-endfun
-
-
-
-       
-
-
