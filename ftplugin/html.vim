@@ -9,9 +9,11 @@ set shiftwidth=2 "Defines how far to shift text when you press >> or <<, or when
 
 let g:html_indent_script1 = "1" "Indents code inside <script> element 
 
+let g:my_name = "Ryan Young"
+
 "Use this when starting a new html file. 
-nnoremap <Leader>,, 
-    \i<!-- Author: Ryan Young --><CR><!-- Last modified:  <Esc>"=strftime("%m-%d-%y")<CR>Pa --><CR><!DOCTYPE html><CR>
+nnoremap <buffer> <Leader>,, 
+    \i<!-- Author:  <Esc>"=g:my_name<CR>Pa --><CR><!-- Last modified:  <Esc>"=strftime("%m-%d-%y")<CR>Pa --><CR><!DOCTYPE html><CR>
     \<html></html><Esc>%i<CR><Esc>O<head></head><Esc>%i<CR><Esc>O
     \<style></style><Esc>o
     \<script src=""></script><Esc>o
@@ -20,10 +22,10 @@ nnoremap <Leader>,,
     \<script></script><Esc>O
 
 " Deletes current tag. Use when hovering over '<'
-nnoremap <Leader>,d1 vf>d<Esc>
+nnoremap <buffer> <Leader>,d1 vf>d<Esc>
 " Deletes the current AND closing tag. Use when hovering over '<'
-nnoremap <Leader>,d2 i`<Esc>lvf>d<Esc>hf<vf>d<Esc>F`x
+nnoremap <buffer> <Leader>,d2 i`<Esc>lvf>d<Esc>hf<vf>d<Esc>F`x
 
-iabbrev <!-- <!-- --><Left><Left><Left><Left>
-iabbrev <em> <em></em><Left><Left><Left><Left><Left>
+iabbrev <buffer> <!-- <!-- --><Left><Left><Left><Left>
+iabbrev <buffer> <em> <em></em><Left><Left><Left><Left><Left>
 

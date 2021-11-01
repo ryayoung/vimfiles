@@ -60,7 +60,7 @@ let g:gruvbox_contrast_light='soft'
 let g:gruvbox_contrast_dark='soft'
 "Sets background based on hour of the day in military time. Adjust this number
 "to change when it gets dark.
-if strftime('%H') > 20 || strftime('%H') < 5
+if strftime('%H') > 18 || strftime('%H') < 5
     set background=dark
 else
     set background=light
@@ -70,7 +70,7 @@ nnoremap <Leader>1l :set background=light<CR>
 nnoremap <Leader>1d :set background=dark<CR>
 
 "CTRLP:------------------------------------------------------------
-"note: I use CtrlP ONLY for recently used files
+"note: I use CtrlP ONLY to open recently used files, as it's much faster than FZF for that.
 
 "Window will display 15 files and load 100. [Results] attr should be as high
 "as possible without experiencing a slow-down
@@ -98,16 +98,16 @@ set laststatus=2 "Needed to display lightline"
 set noshowmode "Mode is already displayed by lightline, so we can hide it"
 
 "QUICK ACCESS FOR EVERYONE:----------------------------------------
-"Directories
+"Directories (change global working directory)
 nnoremap <Leader>.home :cd ~<CR>
 nnoremap <Leader>.files :cd ~\vimfiles<CR>
 nnoremap <Leader>.ftplugin :cd ~\vimfiles\ftplugin<CR>
 nnoremap <Leader>.plugin :cd ~\vimfiles\plugin<CR>
-"Files
+"Files (open in current window)
 nnoremap <Leader>.vrc :e $MYVIMRC<CR>
 nnoremap <Leader>.sets :e ~\vimfiles\plugin\sets.vim<CR>
 nnoremap <Leader>.maps :e ~\vimfiles\plugin\maps.vim<CR>
-"Open cheat sheet in new horizontal split, instead of current window
+"Open cheat sheet readonly in new horizontal split, instead of current window
 nnoremap <Leader>? <C-w>s:view ~\vimfiles\CheatSheet.txt<CR>
 
 "PERSONAL QUICK ACCESS: (Delete these and make your own!)----------
@@ -132,7 +132,6 @@ nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] 
 "let g:ctrlp_open_new_file = 't'
 "let g:ctrlp_working_path_mode = 'rw'
-
 
 " FUNCTIONS:-------------------------------------------------------
 fun! AnyBuffersModified()
