@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 10-31-21
+" Last modified: 11-01-21
 
 "Save
 nnoremap <Leader>s :w<CR>
@@ -10,10 +10,13 @@ nnoremap <Leader>Q :wqa<CR>
 "Save and source file. Use this when editing vimrc for your changes to take effect
 nnoremap <Leader>2 :w<bar> :source %<CR>
 
-"Open new horizontal split with empty file
-nnoremap <Leader>a :new<CR>
-"Open new vertical split with empty file
-nnoremap <Leader>A :vnew<CR>
+"Open graphical file explorer (You can press escape to exit it)
+nnoremap <Leader>` :browse e ~/<CR>
+
+"Open new horizontal split with empty file, AND select recently used files in CtrlP
+nnoremap <Leader>a :new<CR>:CtrlPMRU C:/<CR>
+"Open new vertical split with empty file, AND select recently used files in CtrlP
+nnoremap <Leader>A :vnew<CR>:CtrlPMRU C:/<CR>
 "Open new tab in vim (you can swap between tabs by pressing gt)
 nnoremap <Leader>T :tabnew<CR>
 
@@ -52,8 +55,11 @@ nnoremap <Leader>4 :call CreateHeader()<CR>
 " CHANGE WINDOWS ACCENTS
 nnoremap <Leader>5 :call ChangeAccent()<CR>
 
+" TERMINAL:--------------------------------------------------------
 " COMMIT TO GITHUB
-nnoremap <Leader>cmt :terminal powershell<CR>git add .<CR>git commit -m ""<Left>
+nnoremap <Leader>/cmt :terminal powershell<CR>git add .<CR>git commit -m ""<Left>
+" Activate python virtual environment (must be inside proj folder, and environment must be called "env")
+nnoremap <Leader>/py :terminal powershell<CR>env/Scripts/activate<CR>
 
 
 
@@ -89,7 +95,6 @@ nnoremap mn mn:echo "LOCAL MARK 1 SET"<CR>
 nnoremap mN mb:echo "LOCAL MARK 2 SET"<CR>
 nnoremap <Leader>m 'M:call ToggleSmartMarkGlobal()<CR>
 nnoremap <Leader>n 'n:call ToggleSmartMarkLocal()<CR>
-
 
 "Function to resize window proportionally (Ex: 33%, 50%, etc.)
 "Not currentl in use. To use it, re-map window resize commands

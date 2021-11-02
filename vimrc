@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 10-31-21
+" Last modified: 11-01-21
 
 "Main configuration file for vim. Many more commands can be found in sets.vim
 "and maps.vim inside the plugin folder.
@@ -15,8 +15,10 @@ set directory^=$HOME/vimfiles/tmp//
 "Your name goes here:
 let name = "Ryan Young"
 
+
 "SET LEADER KEY:---------------------------------------------------
 let mapleader = " "
+
 
 "PLUG:-------------------------------------------------------------
 call plug#begin('~/vimfiles/plugged')
@@ -117,6 +119,7 @@ nnoremap <Leader>.dw :cd ~\ryayoung\data-warehousing<CR>
 nnoremap <Leader>.auto :cd ~\ryayoung\karve-automation<CR>
 nnoremap <Leader>.web :cd ~\web-programming<CR>
 nnoremap <Leader>.plug :cd ~\vimfiles\plugged<CR>
+nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School<CR>
 nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1<CR>
 nnoremap <Leader>.www :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\COMP\ 3410\ WWW\ Programming<CR>
 nnoremap <Leader>.pm :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\INFO\ 3340\ Project\ Management<CR>
@@ -132,6 +135,9 @@ nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] 
 "let g:ctrlp_open_new_file = 't'
 "let g:ctrlp_working_path_mode = 'rw'
+
+"Enable this line to disable the noerrmsg plugin and show errors again:
+"let g:loaded_noerrmsg = 0
 
 " FUNCTIONS:-------------------------------------------------------
 fun! AnyBuffersModified()
