@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 11-01-21
+" Last modified: 11-02-21
 
 "Main configuration file for vim. Many more commands can be found in sets.vim
 "and maps.vim inside the plugin folder.
@@ -137,7 +137,7 @@ nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 "let g:ctrlp_working_path_mode = 'rw'
 
 "Enable this line to disable the noerrmsg plugin and show errors again:
-"let g:loaded_noerrmsg = 0
+let g:loaded_noerrmsg = 0
 
 " FUNCTIONS:-------------------------------------------------------
 fun! AnyBuffersModified()
