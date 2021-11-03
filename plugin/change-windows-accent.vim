@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 11-01-21
+" Last modified: 11-02-21
 
 
 let g:current_accent = ""
@@ -37,7 +37,7 @@ fun! ChangeAccent(color="none")
 endfun
 
 "let current_accent = join(split(system('Get-ItemPropertyValue "Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" -Name AccentColorMenu'), '[^0-9]\+'), "")
-if strftime('%H') > 18 || strftime('%H') < 6
+if strftime('%H') > 17 || strftime('%H') < 6
     if g:current_accent != 4281282610
         call ChangeAccent("dark")
     endif

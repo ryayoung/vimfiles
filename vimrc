@@ -62,7 +62,7 @@ let g:gruvbox_contrast_light='soft'
 let g:gruvbox_contrast_dark='soft'
 "Sets background based on hour of the day in military time. Adjust this number
 "to change when it gets dark.
-if strftime('%H') > 18 || strftime('%H') < 5
+if strftime('%H') > 17 || strftime('%H') < 5
     set background=dark
 else
     set background=light
