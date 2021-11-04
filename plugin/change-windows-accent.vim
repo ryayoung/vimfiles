@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 11-02-21
+" Last modified: 11-04-21
 
 
 let g:current_accent = ""
@@ -42,6 +42,6 @@ if strftime('%H') > 17 || strftime('%H') < 6
         call ChangeAccent("dark")
     endif
 elseif g:current_accent != 429056971
-    call ChangeAccent("light")
+    call ChangeAccent("dark")
 endif
 

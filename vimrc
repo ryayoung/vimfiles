@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 11-02-21
+" Last modified: 11-04-21
 
 "Main configuration file for vim. Many more commands can be found in sets.vim
 "and maps.vim inside the plugin folder.
@@ -65,7 +65,8 @@ let g:gruvbox_contrast_dark='soft'
 if strftime('%H') > 17 || strftime('%H') < 5
     set background=dark
 else
-    set background=light
+    "set background=light
+    set background=dark
 endif
 "Change background between light and dark modes
 nnoremap <Leader>1l :set background=light<CR>
