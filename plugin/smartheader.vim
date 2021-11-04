@@ -1,5 +1,5 @@
 " Author: Ryan Young
-"Last modified: 11-03-21
+"Last modified: 11-04-21
 
 " Here is the comment syntax for most languages: https://rosettacode.org/wiki/Comments#Go
 let comments = {
@@ -34,12 +34,12 @@ let comments = {
     \ '':           {'start': '', 'end': ''}
     \ }
 
-let comment_start = ''
-let comment_end = ''
-let comment_start_esc = ''
-let comment_end_esc = ''
+let comment_start = g:comments[&filetype].start
+let comment_end = g:comments[&filetype].end
+"let comment_start_esc = ''
+"let comment_end_esc = ''
 
-au BufNewFile,BufRead,FocusGained,BufEnter,WinEnter,FileType * call SetCommentVars(&filetype)
+au BufNewFile,BufRead,FocusGained,BufEnter,WinEnter,FileType,FileWritePre,BufWritePre,BufWritePost * call SetCommentVars(&filetype)
 fun! SetCommentVars(filetype)
     if has_key(g:comments, a:filetype) == 1
         let g:comment_start = g:comments[a:filetype].start
@@ -52,6 +52,7 @@ fun! SetCommentVars(filetype)
         let g:comment_end_esc = ''
     endif
 endfun
+
 
 fun! SetCommentVarsEscaped()
     " Create an escaped version of start comment and end comment
@@ -72,6 +73,7 @@ fun! SetCommentVarsEscaped()
     let g:comment_start_esc = join(l:com_start_split, "")
     let g:comment_end_esc = join(l:com_end_split, "")
 endfun
+call SetCommentVarsEscaped()
 
 " Bufwritepre, winenter, bufenter, bufread, bufnewfile
 autocmd BufEnter,BufReadPost * call CreateFirstHeader()
@@ -114,6 +116,20 @@ fun! UpdateLastModified()
     endif
 
     call setpos('.', save_cursor)
+endfun
+
+fun! CommentLine()
+    let l:save_cursor = getcurpos()
+    let end = ""
+    if g:comment_end != ""
+        let end = " " . g:comment_end
+    endif
+
+    execute "normal! I" . g:comment_start . " "
+    execute "normal! A" . end
+
+    call setpos('.', l:save_cursor)
+    
 endfun
 
 

@@ -1,5 +1,5 @@
 " Author: Ryan Young
-" Last modified: 11-01-21
+" Last modified: 11-04-21
 
 "Save
 nnoremap <Leader>s :w<CR>
@@ -31,6 +31,9 @@ nnoremap <Leader>cg :cd %:p:h<CR>
 nnoremap <Leader>pa "+p
 "Copy to sys clipboard
 vnoremap <Leader>co "+y
+
+"Comment Line
+nnoremap <C-c> :call CommentLine()<CR>
 
 "shift visual lines up and down
 vnoremap J :m '>+1<CR>gv=gv
