@@ -1,16 +1,19 @@
 " Maintainer:     Ryan Young
-" Last Modified:  11-04-21
+" Last Modified:  11-05-21
 
 " Here is the comment syntax for most languages: https://rosettacode.org/wiki/Comments#Go
-" Set comment vars in other file
-source ~\vimfiles\plugin\set-comment-strings.vim
+
+let g:comment_start = get(g:, 'comment_start', '')
+let g:comment_end = get(g:, 'comment_end', '')
+let g:comment_start_esc = get(g:, 'comment_start_esc', '')
+let g:comment_end_esc = get(g:, 'comment_end_esc', '')
 
 if has_key(g:comments, &filetype) == 1
     let g:comment_start = g:comments[&filetype].start
     let g:comment_end = g:comments[&filetype].end
 endif
 
-" au BufNewFile,BufRead,FocusGained,BufEnter,WinEnter,FileType,FileWritePre,BufWritePre,BufWritePost * call SetCommentVars(&filetype)
+" other events to mess around with: au BufNewFile,BufRead,FocusGained,BufEnter,WinEnter,FileType,FileWritePre,BufWritePre,BufWritePost * call SetCommentVars(&filetype)
 au BufEnter * call SetCommentVars(&filetype) | call CreateFirstHeader()
 fun! SetCommentVars(filetype)
     if has_key(g:comments, a:filetype) == 1
@@ -22,7 +25,7 @@ fun! SetCommentVars(filetype)
         let g:comment_end = ''
         let g:comment_start_esc = ''
         let g:comment_end_esc = ''
-        echom "NOTICE: Comment variable known for filetype " . &filetype
+        echom "NOTICE: Comment string unknown for " . &filetype " files. Go to /comment-string-data.vim"
     endif
 endfun
 
@@ -47,26 +50,37 @@ fun! SetCommentVarsEscaped()
 endfun
 call SetCommentVarsEscaped()
 
-" Bufwritepre, winenter, bufenter, bufread, bufnewfile
-" autocmd BufEnter * call CreateFirstHeader()
 fun! CreateFirstHeader()
-    if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != "" && &filetype != "csv"
+    let g:auto_smart_header = get(g:, 'auto_smart_header', '1')
+    if g:auto_smart_header == 0
+        return
+    elseif line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != "" && &filetype != "csv"
         call CreateHeader()
         exe "normal! jo"
     endif
 endfun
 
 fun! CreateHeader()
+    let g:my_name = get(g:, 'my_name', '<Name goes here> (declare "g:my_name =" in vimrc)') "sets name variable if not already declared in vimrc
     let l:save_cursor = getcurpos()
-    let title1 = "Maintainer:     " . g:name
-    let title2 = "Last Modified:  "
-    let time = strftime("%m-%d-%y")
-    let end = ""
+    let l:title1 = "Maintainer:     " . g:my_name
+    let l:title2 = "Last Modified:  "
+    let l:time = strftime("%m-%d-%y")
+    let l:end = ""
     if g:comment_end != ""
-        let end = " " . g:comment_end
+        let l:end = " " . g:comment_end
     endif
-    execute "normal! ggO" | execute "normal! cc" . g:comment_start . " " . title1 . end
-    execute "normal! o" | execute "normal! cc" . g:comment_start . " " . title2 . time . end
+    let l:space = " "
+    if g:comment_start == ""
+        let l:space = ""
+    endif
+    call setpos('.',[0,1,1,0])
+    exe "normal! O"
+    exe "normal! O"
+    call setline(1, g:comment_start . l:space . l:title1 . l:end)
+    call setline(2, g:comment_start . l:space . l:title2 . l:time . l:end)
+"     execute "normal! ggO" | execute "normal! cc" . g:comment_start . " " . title1 . end
+"     execute "normal! o" | execute "normal! cc" . g:comment_start . " " . title2 . time . end
     call setpos('.', l:save_cursor)
 endfun
 
@@ -95,10 +109,13 @@ fun! ToggleComment()
         let l:line = getline('.')
         if l:line[0:len(g:comment_start)] == g:comment_start . ' '
             call RemoveComment(" ")
+            echo "COMMENT OFF"
         elseif l:line[0:len(g:comment_start)-1] == g:comment_start
             call RemoveComment("")
+            echo "COMMENT OFF"
         else
             call InsertComment()
+            echo "COMMENT ON"
         endif
     endif
 endfun
@@ -118,7 +135,6 @@ fun! RemoveComment(space)
         let l:end = " " . g:comment_end
     endif
     let l:current_line = getline('.')
-
 
     if a:space == " "
         call setline('.', l:current_line[len(g:comment_start)+1:-1])

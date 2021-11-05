@@ -1,6 +1,11 @@
 " Author: Ryan Young
 " Last modified: 11-04-21
 
+let g:change_accent_enabled = get(g:, 'change_accent_enabled', "1")
+if g:change_accent_enabled == 0
+    finish
+endif
+
 
 let g:current_accent = ""
 au VimEnter * let g:current_accent = join(split(system('Get-ItemPropertyValue "Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent" -Name AccentColorMenu'), '[^0-9]\+'), "")
@@ -42,6 +47,6 @@ if strftime('%H') > 17 || strftime('%H') < 6
         call ChangeAccent("dark")
     endif
 elseif g:current_accent != 429056971
-    call ChangeAccent("dark")
+    call ChangeAccent("light")
 endif
 

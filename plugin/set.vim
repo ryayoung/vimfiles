@@ -11,7 +11,7 @@ set lines=100 columns=125 "sets size of window that opens. (lines is set to a ve
 set guioptions-=m "remove menu bar
 set guioptions-=T "remove toolbar
 set guioptions-=r "remove right hand scroll bar
-set guioptions-=L "remove right hand scroll bar
+set guioptions-=L "remove left hand scroll bar
 
 set autoread "automatically refresh open files that have been updated elsewhere
 

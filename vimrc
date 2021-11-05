@@ -12,9 +12,6 @@ filetype indent on
 " For this to work, you must create a /tmp folder inside vimfiles.
 set directory^=$HOME/vimfiles/tmp// 
 
-" Your name goes here:
-let name = "Ryan Young"
-
 
 " SET LEADER KEY:---------------------------------------------------
 let mapleader = " "
@@ -34,7 +31,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tmsvg/pear-tree'
+" Plug 'ryayoung/vim-comments-and-headers'
 call plug#end()
+
 
 " LINE NUMBERING:---------------------------------------------------
 set number "enable line numbering
@@ -95,6 +94,19 @@ let g:lightline = {}
 let g:lightline = {'colorscheme': 'gruvbox'}
 set laststatus=2 "Needed to display lightline"
 set noshowmode "Mode is already displayed by lightline, so we can hide it"
+
+" VIM COMMENTS AND HEADERS: ----------------------------------------
+" Your name goes here:
+let g:my_name = "Ryan Young"
+" Comment Line
+nnoremap <C-c> :call ToggleComment()<CR>
+vnoremap <C-c> :call ToggleComment()<CR>gv
+" Create header at the top of the file with name and date
+nnoremap <Leader>4 :call CreateHeader()<CR>
+
+
+" PERSONAL PLUGINS: ------------------------------------------------
+let g:change_accent_enabled = 0
 
 " QUICK ACCESS FOR EVERYONE:----------------------------------------
 " Directories (change global working directory)

@@ -32,9 +32,6 @@ vnoremap <Leader>co "+y
 " Open graphical file explorer (You can press escape to exit it)
 nnoremap <Leader>` :browse e ~/<CR>
 
-" Comment Line
-nnoremap <C-c> :call ToggleComment()<CR>
-vnoremap <C-c> :call ToggleComment()<CR>gv
 
 " shift visual lines up and down
 vnoremap J :m '>+1<CR>gv=gv
@@ -46,9 +43,6 @@ vnoremap > >gv
 
 " Execute macro stored at 'q'
 nnoremap <Leader>3 @q
-
-" Create header at the top of the file with name and date
-nnoremap <Leader>4 :call CreateHeader()<CR>
 
 " CHANGE WINDOWS ACCENTS
 nnoremap <Leader>5 :call ChangeAccent()<CR>
