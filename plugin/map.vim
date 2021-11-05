@@ -1,70 +1,73 @@
 " Author: Ryan Young
 " Last modified: 11-04-21
 
-"Save
+" Save
 nnoremap <Leader>s :w<CR>
-"Quit current window
+" Quit current window
 nnoremap <Leader>q :q<CR>
-"Save and Quit ALL windows
+" Save and Quit ALL windows
 nnoremap <Leader>Q :wqa<CR>
-"Save and source file. Use this when editing vimrc for your changes to take effect
+" Save and source file. Use this when editing vimrc for your changes to take effect
 nnoremap <Leader>2 :w<bar> :source %<CR>
 
-"Open graphical file explorer (You can press escape to exit it)
-nnoremap <Leader>` :browse e ~/<CR>
+" Quickly navigate up or down 15 lines
+nnoremap 1j 15j
+nnoremap 1k 15k
 
-"Open new horizontal split with empty file, AND select recently used files in CtrlP
+" Open new horizontal split with empty file, AND select recently used files in CtrlP
 nnoremap <Leader>a :new<CR>:CtrlPMRU C:/<CR>
-"Open new vertical split with empty file, AND select recently used files in CtrlP
+" Open new vertical split with empty file, AND select recently used files in CtrlP
 nnoremap <Leader>A :vnew<CR>:CtrlPMRU C:/<CR>
-"Open new tab in vim (you can swap between tabs by pressing gt)
+" Open new tab in vim (you can swap between tabs by pressing gt)
 nnoremap <Leader>T :tabnew<CR>
 
-"Open Powershell
-nnoremap <Leader>t :terminal powershell<CR>
-"Change LOCAL working directory to current file
-nnoremap <Leader>cur :lcd %:p:h<CR>
-"Change GLOBAL working directory to current file
-nnoremap <Leader>cg :cd %:p:h<CR>
+"Access window commands not already mapped here. This maps to Ctrl-w
+nnoremap <Leader>w <C-w>
 
-"Paste from sys clipboard
+" Paste from sys clipboard
 nnoremap <Leader>pa "+p
-"Copy to sys clipboard
+" Copy to sys clipboard
 vnoremap <Leader>co "+y
 
-"Comment Line
-nnoremap <C-c> :call CommentLine()<CR>
+" Open graphical file explorer (You can press escape to exit it)
+nnoremap <Leader>` :browse e ~/<CR>
 
-"shift visual lines up and down
+" Comment Line
+nnoremap <C-c> :call ToggleComment()<CR>
+vnoremap <C-c> :call ToggleComment()<CR>gv
+
+" shift visual lines up and down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-"Quickly set font size
-nnoremap <Leader>f :call SetSmallerFont()<CR>:echo GetFontSize()<CR>
-nnoremap <Leader>F :call SetLargerFont()<CR>:echo GetFontSize()<CR>
+" Stay in visual mode after indenting a selection
+vnoremap < <gv
+vnoremap > >gv
 
-"Exit closing brackets/braces/etc with TAB
-inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
-
-"Easily delete previous word while typing using Ctrl-backspace 
-inoremap <C-BS> <C-W>
-
-"Execute macro stored at 'q'
+" Execute macro stored at 'q'
 nnoremap <Leader>3 @q
 
-"Create header at the top of the file with name and date
+" Create header at the top of the file with name and date
 nnoremap <Leader>4 :call CreateHeader()<CR>
 
 " CHANGE WINDOWS ACCENTS
 nnoremap <Leader>5 :call ChangeAccent()<CR>
 
+" Exit closing brackets/braces/etc with TAB
+inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
+
+" Easily delete previous word while typing using Ctrl-backspace 
+inoremap <C-BS> <C-W>
+
 " TERMINAL:--------------------------------------------------------
+" Open Powershell
+nnoremap <Leader>// :terminal powershell<CR>
+" PULL FROM GITHUB
+nnoremap <Leader>/pull :terminal powershell<CR>git pull<CR>
 " COMMIT TO GITHUB
 nnoremap <Leader>/cmt :terminal powershell<CR>git add .<CR>git commit -m ""<Left>
 " Activate python virtual environment (must be inside proj folder, and environment must be called "env")
 nnoremap <Leader>/py :terminal powershell<CR>env/Scripts/activate<CR>
-
-
 
 "WINDOW MANIPULATION:----------------------------------------------
 "Move cursor to adjacent windows
@@ -88,8 +91,6 @@ nnoremap <Leader>] :resize +15<CR>
 "nnoremap <Leader>[ :call ResizeWindow("h", -1)<CR>
 "nnoremap <Leader>] :call ResizeWindow("h", 1)<CR>
 
-"Access window commands not already mapped here. This maps to Ctrl-w
-nnoremap <Leader>w <C-w>
 
 "SMART MARKS:------------------------------------------------------
 nnoremap mm mM:echo "GLOBAL MARK 1 SET"<CR>

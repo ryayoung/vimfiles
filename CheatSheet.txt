@@ -11,34 +11,43 @@ Leader Key: <Space>
 <Leader>s       Save      
 <Leader>Q       Save and quit ALL windows
 <Leader>2       Save and source file (use when editing vimrc for changes to take effect)
+1j              Navigate down 15 lines
+1k              Navigate down 15 lines
 <Leader>a       Open new horizontal split with empty file
 <Leader>A       Open new vertical split with empty file
 <Leader>T       Open new tab with empty file (swap tabs with "gt")
-<Leader>t       Open Powershell in current directory
-<Leader>cur     Change working dir. of CURRENT WINDOW to current file
-<Leader>cg      Change GLOBAL working dir. to current file
 <Leader>w       Access window commands not already mapped here. (Example: "<Leader>ws")
 <Leader>pa      Paste from system clipboard
 <Leader>co      Copy to system clipboard
-<Leader>f       Decrease font size
-<Leader>F       Increase font size
+<Leader>`       Open graphical file explorer
+<C-c>           Comment/uncomment line (Ctrl-c)
 <Leader>cc      Explore files in dir. of current file
 <Leader>cx      Explore files in working directory
 <Leader>u       Show UndoTree (this is a plugin)
 <Leader>1l      Light background
 <Leader>1d      Dark background
 <Leader>b       Select from buffered files (all files prev. opened in current session)
-<Leader>cd      Select recently used files
-<Leader>cn      Open fzf to select a file
+<Leader>cd      Select ALL recently used files
+<Leader>cn      CtrlP select ALL files in cwd
 <Leader>3       Execute macro stored at 'q'
 
 <Leader> {h j k l}      Move cursor to adjacent windows. (Example: "<Leader>h")
 <Leader> {H J K L}      Move windows left, down, up, or right. (Example: "<Leader>H")
 <Leader> {- = [ ]}      Resize current window. (Example: "<Leader>=")
 
+POWERSHELL COMMANDS
+<Leader>//      Open Powershell in current directory
+<Leader>/pull   Pull from github repository in cwd
+<Leader>/cmt    Commit to github in cwd
+<Leader>/py     Activate python venv in cwd
+
+SMART HEADER PLUGIN
+<Leader>4       Create header at the top of file with name and date
+
 These are for my setfontsize plugin: (see setfontsize.vim)
 <F11>           Decrease font size
 <F12>           Increase font size
+
 These are for my Smart Marks plugin: (see smartmarks.vim for explanation)
 mm                  Set Global Smart Mark 1
 mM                  Set Global Smart Mark 2
@@ -56,13 +65,18 @@ mN                  Set Local Smart Mark 2
 <C-BS>              (Ctrl-backspace) delete previous word
 
 ------- QUICK ACCESS -------
-Files:
+FILES:
 <Leader>?           Open this cheat sheet in a new split
-<Leader>vrc         vimrc in current window
-<Leader>maps        maps.vim in current window
-<Leader>sets        sets.vim in current window
-Directories:
+<Leader>.vrc        vimrc in current window
+<Leader>.map        maps.vim in current window
+<Leader>.set        sets.vim in current window
+DIRECTORIES:
 <Leader>.home       Change working dir. to home
-<Leader>.files      Change working dir. to vimfiles
+<Leader>.vim        Change working dir. to vimfiles
+<Leader>.cur        Change working dir. of CURRENT WINDOW to current file
+<Leader>.cg         Change GLOBAL working dir. to current file
 
+------- ANY MODE -------
+F11                 Decrease font size
+F12                 Increase font size
 

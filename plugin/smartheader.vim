@@ -1,45 +1,17 @@
-" Author: Ryan Young
-"Last modified: 11-04-21
+" Maintainer:     Ryan Young
+" Last Modified:  11-04-21
 
 " Here is the comment syntax for most languages: https://rosettacode.org/wiki/Comments#Go
-let comments = {
-    \ 'vb':         {'start': "'", 'end': ''},
-    \ 'vim':        {'start': '"', 'end': ''},
-    \ 'pascal':     {'start': '(*', 'end': '*)'},
-    \ 'xhtml':      {'start': '<!--', 'end': '-->'},
-    \ 'html':       {'start': '<!--', 'end': '-->'},
-    \ 'xml':        {'start': '<!--', 'end': '-->'},
-    \ 'css':        {'start': '/*', 'end': '*/'},
-    \ 'c':          {'start': '/*', 'end': '*/'},
-    \ 'typescript': {'start': '/*', 'end': '*/'},
-    \ 'python':     {'start': '#', 'end': ''},
-    \ 'ruby':       {'start': '#', 'end': ''},
-    \ 'perl':       {'start': '#', 'end': ''},
-    \ 'ps1':        {'start': '#', 'end': ''},
-    \ 'cs':         {'start': '//', 'end': ''},
-    \ 'go':         {'start': '//', 'end': ''},
-    \ 'swift':      {'start': '//', 'end': ''},
-    \ 'cpp':        {'start': '//', 'end': ''},
-    \ 'php':        {'start': '//', 'end': ''},
-    \ 'javascript': {'start': '//', 'end': ''},
-    \ 'java':       {'start': '//', 'end': ''},
-    \ 'rust':       {'start': '//', 'end': ''},
-    \ 'scala':      {'start': '//', 'end': ''},
-    \ 'kotlin':     {'start': '//', 'end': ''},
-    \ 'sql':        {'start': '--', 'end': ''},
-    \ 'haskell':    {'start': '--', 'end': ''},
-    \ 'lua':        {'start': '--', 'end': ''},
-    \ 'ada':        {'start': '--', 'end': ''},
-    \ 'matlab':     {'start': '%', 'end': ''},
-    \ '':           {'start': '', 'end': ''}
-    \ }
+" Set comment vars in other file
+source ~\vimfiles\plugin\set-comment-strings.vim
 
-let comment_start = g:comments[&filetype].start
-let comment_end = g:comments[&filetype].end
-"let comment_start_esc = ''
-"let comment_end_esc = ''
+if has_key(g:comments, &filetype) == 1
+    let g:comment_start = g:comments[&filetype].start
+    let g:comment_end = g:comments[&filetype].end
+endif
 
-au BufNewFile,BufRead,FocusGained,BufEnter,WinEnter,FileType,FileWritePre,BufWritePre,BufWritePost * call SetCommentVars(&filetype)
+" au BufNewFile,BufRead,FocusGained,BufEnter,WinEnter,FileType,FileWritePre,BufWritePre,BufWritePost * call SetCommentVars(&filetype)
+au BufEnter * call SetCommentVars(&filetype) | call CreateFirstHeader()
 fun! SetCommentVars(filetype)
     if has_key(g:comments, a:filetype) == 1
         let g:comment_start = g:comments[a:filetype].start
@@ -50,9 +22,9 @@ fun! SetCommentVars(filetype)
         let g:comment_end = ''
         let g:comment_start_esc = ''
         let g:comment_end_esc = ''
+        echom "NOTICE: Comment variable known for filetype " . &filetype
     endif
 endfun
-
 
 fun! SetCommentVarsEscaped()
     " Create an escaped version of start comment and end comment
@@ -76,7 +48,7 @@ endfun
 call SetCommentVarsEscaped()
 
 " Bufwritepre, winenter, bufenter, bufread, bufnewfile
-autocmd BufEnter,BufReadPost * call CreateFirstHeader()
+" autocmd BufEnter * call CreateFirstHeader()
 fun! CreateFirstHeader()
     if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 && &filetype != "" && &filetype != "csv"
         call CreateHeader()
@@ -86,8 +58,8 @@ endfun
 
 fun! CreateHeader()
     let l:save_cursor = getcurpos()
-    let title1 = "Author: " . g:name
-    let title2 = "Last modified: "
+    let title1 = "Maintainer:     " . g:name
+    let title2 = "Last Modified:  "
     let time = strftime("%m-%d-%y")
     let end = ""
     if g:comment_end != ""
@@ -104,7 +76,7 @@ fun! UpdateLastModified()
         return
     endif
     let save_cursor = getcurpos()
-    let title = "Last modified: "
+    let title = "Last Modified:  "
     let time = strftime("%m-%d-%y")
     let end = ""
     if g:comment_end_esc != ""
@@ -118,49 +90,48 @@ fun! UpdateLastModified()
     call setpos('.', save_cursor)
 endfun
 
-fun! CommentLine()
-    let l:save_cursor = getcurpos()
-    let end = ""
-    if g:comment_end != ""
-        let end = " " . g:comment_end
+fun! ToggleComment()
+    if len(g:comment_start) > 0
+        let l:line = getline('.')
+        if l:line[0:len(g:comment_start)] == g:comment_start . ' '
+            call RemoveComment(" ")
+        elseif l:line[0:len(g:comment_start)-1] == g:comment_start
+            call RemoveComment("")
+        else
+            call InsertComment()
+        endif
     endif
-
-    execute "normal! I" . g:comment_start . " "
-    execute "normal! A" . end
-
-    call setpos('.', l:save_cursor)
-    
 endfun
 
+fun! InsertComment()
+    let l:end = ""
+    if g:comment_end != ""
+        let l:end = " " . g:comment_end
+    endif
+    let l:current_line = getline('.')
+    call setline('.', g:comment_start_esc . " " . l:current_line . l:end)
+endfun
 
-" vim   vim         "
-" vb    vb          '
-" inc   pascal      (* *)
-" xhtml xhtml       
-" html  html        <!-- -->
-" xml   xml         <!-- -->
-" css   css         /* */
-" c     c           /* */
-" ts    typescript  /* */
-" py    python      #
-" rb    ruby        #
-" pl    perl        #
-" ps1   ps1         #
-" cs    cs          //
-" go    go          //
-" swift swift       //
-" cpp   cpp         //
-" php   php         //
-" js    javascript  //
-" java  java        //
-" rs    rust        //
-" scala scala       //
-" kt    kotlin      //
-" sql   sql         --
-" hs    haskell     --
-" lua   lua         --
-" ada   ada         --
-" m     matlab      %
-" txt   text        none
-" md    markdown    none
+fun! RemoveComment(space)
+    let l:end = ""
+    if g:comment_end != ""
+        let l:end = " " . g:comment_end
+    endif
+    let l:current_line = getline('.')
+
+
+    if a:space == " "
+        call setline('.', l:current_line[len(g:comment_start)+1:-1])
+    elseif a:space == ""
+        call setline('.', l:current_line[len(g:comment_start):-1])
+    endif
+
+    let l:current_line = getline('.')
+
+    if getline('.')[-(len(g:comment_end)+1):-1] == " " . g:comment_end
+        call setline('.', l:current_line[0:-(len(g:comment_end)+2)])
+    endif
+
+endfun
+
 
