@@ -1,8 +1,10 @@
-" Author: Ryan Young
-" Last modified: 11-04-21
+" Maintainer:     Ryan Young
+" Last Modified:  Nov 06, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
+
+
 syntax on "Enables syntax highlighting. Very important
 filetype on
 filetype plugin on "Tells vim to run files in /ftplugin when the filetype in current window changes.
@@ -10,14 +12,33 @@ filetype indent on
 
 " Tells Vim to place all your swap files there, so your working directory stays clean.
 " For this to work, you must create a /tmp folder inside vimfiles.
-set directory^=$HOME/vimfiles/tmp// 
+set directory^=$HOME/vimfiles/tmp//
 
+" SET CWD:--------------------------------------------------------------------
+" Working directory will be set as soon as you enter vim
+" NOTE - if you use terminal vim EVER, please remove this line.
+autocmd VimEnter * cd vimfiles
 
-" SET LEADER KEY:---------------------------------------------------
+" SET LEADER KEY:-------------------------------------------------------------
 let mapleader = " "
 
+" LINE NUMBERING:-------------------------------------------------------------
+set number "enable line numbering
+augroup numbertoggle "Number mode changes between insert and normal mode
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
 
-"PLUG:-------------------------------------------------------------
+" OPEN FILE IN LAST KNOWN CURSOR POSITION:------------------------------------
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
+
+
+
+"PLUG:------------------------------------------------------------------------
 call plug#begin('~/vimfiles/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'leafgarland/typescript-vim'
@@ -25,8 +46,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
 Plug 'maxboisvert/vim-simple-complete'
 Plug 'jsborjesson/vim-uppercase-sql'
-" Plug 'junegunn/fzf.vim'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'tpope/vim-repeat'
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mattn/emmet-vim'
@@ -35,15 +55,7 @@ Plug 'tmsvg/pear-tree'
 call plug#end()
 
 
-" LINE NUMBERING:---------------------------------------------------
-set number "enable line numbering
-augroup numbertoggle "Number mode changes between insert and normal mode
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-augroup END
-
-" NETRW:------------------------------------------------------------
+" NETRW:----------------------------------------------------------------------
 let g:netrw_banner=0
 " :Vex - Explore files in dir of current file
 nnoremap <leader>cc :Vex<bar> :vertical resize 20<CR>jj
@@ -51,11 +63,11 @@ nnoremap <leader>cc :Vex<bar> :vertical resize 20<CR>jj
 nnoremap <leader>cx :vs.<bar> :vertical resize 20<CR>jj
 let g:netrw_altv = 1 "When opening file from explorer by pressing v, it opens to the right instead of left
 
-" UNDOTREE:---------------------------------------------------------
+" UNDOTREE:-------------------------------------------------------------------
 " Show undo history
 nnoremap <leader>u :UndotreeShow<CR>
 
-" GRUVBOX:----------------------------------------------------------
+" GRUVBOX:--------------------------------------------------------------------
 colorscheme gruvbox
 let g:gruvbox_contrast_light='soft'
 let g:gruvbox_contrast_dark='soft'
@@ -71,44 +83,38 @@ endif
 nnoremap <Leader>1l :set background=light<CR>
 nnoremap <Leader>1d :set background=dark<CR>
 
-" CTRLP:------------------------------------------------------------
+" CTRLP:----------------------------------------------------------------------
 " Window will display 15 files and load 100. [Results] attr should be as high
 " as possible without experiencing a slow-down
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:150' 
 " Default to searching by filename only instead of path"
 let g:ctrlp_by_filename = 1 
 " Select buffered files (files that have been open at one point in current session)
-nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader><Leader> :CtrlPBuffer<CR>
 " Select recently used files
 nnoremap <Leader>cd :CtrlPMRU C:/<CR> 
 " Open file finder in current working directory
 nnoremap <Leader>cn :CtrlP getcwd()<CR>
 
-" EMMET:------------------------------------------------------------
+" EMMET:----------------------------------------------------------------------
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-k>'
  
-" LIGHTLINE:--------------------------------------------------------
+" LIGHTLINE:------------------------------------------------------------------
 let g:lightline = {}
 let g:lightline = {'colorscheme': 'gruvbox'}
 set laststatus=2 "Needed to display lightline"
 set noshowmode "Mode is already displayed by lightline, so we can hide it"
 
-" VIM COMMENTS AND HEADERS: ----------------------------------------
+" VIM COMMENTS AND HEADERS: --------------------------------------------------
 " Your name goes here:
 let g:my_name = "Ryan Young"
-" Comment Line
-nnoremap <C-c> :call ToggleComment()<CR>
-vnoremap <C-c> :call ToggleComment()<CR>gv
-" Create header at the top of the file with name and date
-nnoremap <Leader>4 :call CreateHeader()<CR>
 
-
-" PERSONAL PLUGINS: ------------------------------------------------
+" PERSONAL PLUGINS: ----------------------------------------------------------
 let g:change_accent_enabled = 0
 
-" QUICK ACCESS FOR EVERYONE:----------------------------------------
+" QUICK ACCESS FOR EVERYONE:--------------------------------------------------
 " Directories (change global working directory)
 nnoremap <Leader>.home :cd ~<CR>:call OutputDirName("DIRECTORY: ")<CR>
 nnoremap <Leader>.vim :cd ~\vimfiles\<CR>:call OutputDirName("DIRECTORY: ")<CR>
@@ -129,7 +135,7 @@ nnoremap <Leader>.cur :lcd %:p:h<CR>:call OutputDirName("LOCAL DIRECTORY: ")<CR>
 " Change GLOBAL working directory to current file
 nnoremap <Leader>.cg :cd %:p:h<CR>:call OutputDirName("DIRECTORY: ")<CR>
 
-" PERSONAL QUICK ACCESS: (Delete these and make your own!)----------
+" PERSONAL QUICK ACCESS: (Delete these! Make your own!)-----------------------
 " Directories
 nnoremap <Leader>.ryayoung :cd ~\ryayoung<CR>
 nnoremap <Leader>.dw :cd ~\ryayoung\data-warehousing<CR>
@@ -144,7 +150,7 @@ nnoremap <Leader>.mgmt :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\MGM
 " Files
 nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 
-" FUNCTION FOR QUICK ACCESS:----------------------------------------
+" FUNCTION FOR QUICK ACCESS:--------------------------------------------------
 fun! OutputDirName(message)
     execute 'echom a:message . "\\" . split(getcwd(),"\\")[-2] . "\\" . split(getcwd(),"\\")[-1]'
 endfun
@@ -152,7 +158,7 @@ fun! OutputFName(message)
     execute 'echom a:message . "\\" . split(getcwd(),"\\")[-2] . "\\" . expand("%:t")'
 endfun
 
-" NOT USED:---------------------------------------------------------
+" NOT USED:-------------------------------------------------------------------
 " Not sure what these do, so I'll comment them out for now
 " let g:gruvbox_number_column='bg0'
 " let g:netrw_browse_split=2
@@ -164,7 +170,7 @@ endfun
 " Enable this line to disable the noerrmsg plugin and show errors again:
 let g:loaded_noerrmsg = 0
 
-" FUNCTIONS:-------------------------------------------------------
+" FUNCTIONS:------------------------------------------------------------------
 fun! AnyBuffersModified()
     let l:numModified = 0
     let l:numUnnamedModified = 0
@@ -188,3 +194,5 @@ fun! AnyBuffersModified()
         return 0
     endif
 endfun
+
+

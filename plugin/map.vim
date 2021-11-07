@@ -1,5 +1,5 @@
-" Author: Ryan Young
-" Last modified: 11-04-21
+" Maintainer:     Ryan Young
+" Last Modified:  Nov 06, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>
@@ -53,6 +53,7 @@ inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
 " Easily delete previous word while typing using Ctrl-backspace 
 inoremap <C-BS> <C-W>
 
+
 " TERMINAL:--------------------------------------------------------
 " Open Powershell
 nnoremap <Leader>// :terminal powershell<CR>
@@ -65,47 +66,55 @@ nnoremap <Leader>/py :terminal powershell<CR>env/Scripts/activate<CR>
 
 "WINDOW MANIPULATION:----------------------------------------------
 "Move cursor to adjacent windows
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
 "Move windows 
-nnoremap <Leader>H :wincmd H<CR>
-nnoremap <Leader>J :wincmd J<CR>
-nnoremap <Leader>K :wincmd K<CR>
-nnoremap <Leader>L :wincmd L<CR>
+nnoremap <silent> <Leader>H :wincmd H<CR>
+nnoremap <silent> <Leader>J :wincmd J<CR>
+nnoremap <silent> <Leader>K :wincmd K<CR>
+nnoremap <silent> <Leader>L :wincmd L<CR>
 "Resize windows
-nnoremap <Leader>- :vertical resize -20<CR>
-nnoremap <Leader>= :vertical resize +20<CR>
-nnoremap <Leader>[ :resize -15<CR>
-nnoremap <Leader>] :resize +15<CR>
-"Resize windows proportionally by 50%
-"nnoremap <Leader>- :call ResizeWindow("v", -1)<CR>
-"nnoremap <Leader>= :call ResizeWindow("v", 1)<CR>
-"nnoremap <Leader>[ :call ResizeWindow("h", -1)<CR>
-"nnoremap <Leader>] :call ResizeWindow("h", 1)<CR>
+nnoremap <silent> <Leader>- :vertical resize -20<CR>
+nnoremap <silent> <Leader>= :vertical resize +20<CR>
+nnoremap <silent> <Leader>[ :resize -15<CR>
+nnoremap <silent> <Leader>] :resize +15<CR>
 
 
-"SMART MARKS:------------------------------------------------------
-nnoremap mm mM:echo "GLOBAL MARK 1 SET"<CR>
-nnoremap mM mK:echo "GLOBAL MARK 2 SET"<CR>
-nnoremap mn mn:echo "LOCAL MARK 1 SET"<CR>
-nnoremap mN mb:echo "LOCAL MARK 2 SET"<CR>
-nnoremap <Leader>m 'M:call ToggleSmartMarkGlobal()<CR>
-nnoremap <Leader>n 'n:call ToggleSmartMarkLocal()<CR>
-
-"Function to resize window proportionally (Ex: 33%, 50%, etc.)
-"Not currentl in use. To use it, re-map window resize commands
-"Example - replace ':vertical resize +20' with ':call ResizeWindow("v", 1)'
-function! ResizeWindow(type, change) "Type: v or h. Change: -1 or 1
-    let l:height = winheight(0)
-    let l:width = winwidth(0)
-    let l:amount = 2 " 3 here means an amount of 1/3 increase or decrease
-
-    if a:type == "v"
-        execute "vertical resize " . (l:width + ((l:width / l:amount) * a:change))
-    elseif a:type == "h"
-        execute "resize " . (l:height + ((l:height / l:amount) * a:change))
-    endif
-endfunction
-
+" Smart delete/change inside/around
+" Create a plugin where, when you try to change or delete inside/around
+" something, vim first checks whether your cursor is actually inside (or at
+" the start of) the enclosure you're trying to edit. If you're not inside one
+" on the current line, then use feedkeys('f(') to try and jump to an
+" enclosure. Then, make a second attempt to execute the change/delete 
+" inside/around command.
+" nnoremap ci[ f[ci[
+" nnoremap di[ f[di[
+" nnoremap ca[ f[ca[
+" nnoremap da[ f[da[
+" 
+" nnoremap ci( f(ci(
+" nnoremap di( f(di(
+" nnoremap ca( f(ca(
+" nnoremap da( f(da(
+" 
+" nnoremap ci{ f{ci{
+" nnoremap di{ f{di{
+" nnoremap ca{ f{ca{
+" nnoremap da{ f{da{
+" 
+" nnoremap ci< f<ci<
+" nnoremap di< f<di<
+" nnoremap ca< f<ca<
+" nnoremap da< f<da<
+" 
+" nnoremap ci" f"ci"
+" nnoremap di" f"di"
+" nnoremap ca" f"ca"
+" nnoremap da" f"da"
+" 
+" nnoremap ci' f'ci'
+" nnoremap di' f'di'
+" nnoremap ca' f'ca'
+" nnoremap da' f'da'

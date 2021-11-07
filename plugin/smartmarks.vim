@@ -9,15 +9,12 @@
 
 "How do you use it? First, "mm" sets global mark 1, and "mM" sets global mark 2. This simplifies the process of creating global marks and makes it intuitive to remember which one is which. Now for the fun part. Once you've set the two marks, <Leader>m will toggle between them. If you have your spacebar set as your leader key, this is an extremely fast command to press. Better yet, this eliminates the need for you to remember which mark is which. You can simply move to the "other" one.
 
-"Mappings to set marks
-"nnoremap mm mM:echo "GLOBAL MARK 1 SET"<CR>
-"nnoremap mM mK:echo "GLOBAL MARK 2 SET"<CR>
-"nnoremap mn mn:echo "LOCAL MARK 1 SET"<CR>
-"nnoremap mN mb:echo "LOCAL MARK 2 SET"<CR>
-
-"Mappings to toggle between marks:
-"nnoremap <Leader>m 'M:call ToggleSmartMarkGlobal()<CR>
-"nnoremap <Leader>n 'n:call ToggleSmartMarkLocal()<CR>
+nnoremap mm mM:echo "GLOBAL MARK 1 SET"<CR>
+nnoremap mM mK:echo "GLOBAL MARK 2 SET"<CR>
+nnoremap mn mn:echo "LOCAL MARK 1 SET"<CR>
+nnoremap mN mb:echo "LOCAL MARK 2 SET"<CR>
+nnoremap <Leader>m 'M:call ToggleSmartMarkGlobal()<CR>
+nnoremap <Leader>n 'n:call ToggleSmartMarkLocal()<CR>
 
 let g:smart_mark_global = 1
 

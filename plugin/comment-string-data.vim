@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  11-04-21
+" Last Modified:  Nov 06, 2021
 
 " Here is the comment syntax for most languages: https://rosettacode.org/wiki/Comments#Go
 " Add more to this list if you're using a language not listed here
@@ -54,5 +54,6 @@ let g:comments = {
     \ 'simula':     {'start': 'COMMENT','end': ';'},
     \ 'tpp':        {'start': '--##',   'end': ''},
     \ 'help':       {'start': '',       'end': ''},
+    \ 'custom':     {'start': '',       'end': ''},
     \ '':           {'start': '',       'end': ''}
     \ }
