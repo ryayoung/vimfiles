@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 07, 2021
+" Last Modified:  Nov 08, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -17,7 +17,7 @@ set directory^=$HOME/vimfiles/tmp//
 " SET CWD:--------------------------------------------------------------------
 " Working directory will be set as soon as you enter vim
 " NOTE - if you use terminal vim EVER, please remove this line.
-autocmd VimEnter * if getcwd() == "C:\\Users\\Ryan Young" | cd vimfiles | endif
+autocmd VimEnter * if getcwd() == "C:\\Users\\ryany" | cd vimfiles | endif
 
 " SET LEADER KEY:-------------------------------------------------------------
 let mapleader = " "
@@ -35,7 +35,6 @@ autocmd BufReadPost *
   \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
   \ |   exe "normal! g`\""
   \ | endif
-
 
 
 "PLUG:------------------------------------------------------------------------
@@ -67,6 +66,9 @@ let g:netrw_altv = 1 "When opening file from explorer by pressing v, it opens to
 " UNDOTREE:-------------------------------------------------------------------
 " Show undo history
 nnoremap <leader>u :UndotreeShow<CR>
+
+" SIMPLE COMPLETE:------------------------------------------------------------
+let g:loaded_vim_simple_complete = 0
 
 " GRUVBOX:--------------------------------------------------------------------
 colorscheme gruvbox
