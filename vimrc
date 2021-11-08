@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 06, 2021
+" Last Modified:  Nov 07, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -17,7 +17,7 @@ set directory^=$HOME/vimfiles/tmp//
 " SET CWD:--------------------------------------------------------------------
 " Working directory will be set as soon as you enter vim
 " NOTE - if you use terminal vim EVER, please remove this line.
-autocmd VimEnter * cd vimfiles
+autocmd VimEnter * if getcwd() == "C:\\Users\\Ryan Young" | cd vimfiles | endif
 
 " SET LEADER KEY:-------------------------------------------------------------
 let mapleader = " "
@@ -51,6 +51,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tmsvg/pear-tree'
+" Plug 'tpope/vim-commentary'
 " Plug 'ryayoung/vim-comments-and-headers'
 call plug#end()
 
@@ -116,10 +117,10 @@ let g:change_accent_enabled = 0
 
 " QUICK ACCESS FOR EVERYONE:--------------------------------------------------
 " Directories (change global working directory)
-nnoremap <Leader>.home :cd ~<CR>:call OutputDirName("DIRECTORY: ")<CR>
-nnoremap <Leader>.vim :cd ~\vimfiles\<CR>:call OutputDirName("DIRECTORY: ")<CR>
-nnoremap <Leader>.ftplugin :cd ~\vimfiles\ftplugin<CR>:call OutputDirName("DIRECTORY: ")<CR>
-nnoremap <Leader>.plugin :cd ~\vimfiles\plugin<CR>:call OutputDirName("DIRECTORY: ")<CR>
+nnoremap <Leader>.home :cd ~<CR>:call OutputDirName("DIR: ")<CR>
+nnoremap <Leader>.vim :cd ~\vimfiles\<CR>:call OutputDirName("DIR: ")<CR>
+nnoremap <Leader>.ftplugin :cd ~\vimfiles\ftplugin<CR>:call OutputDirName("DIR: ")<CR>
+nnoremap <Leader>.plugin :cd ~\vimfiles\plugin<CR>:call OutputDirName("DIR: ")<CR>
 " Files (open in current window)
 nnoremap <Leader>.vrc :e $MYVIMRC<CR>:call OutputFName("FILE: ")<CR>
 nnoremap <Leader>.set :e ~\vimfiles\plugin\set.vim<CR>:call OutputFName("FILE: ")<CR>
@@ -131,9 +132,9 @@ nnoremap <Leader>.. :cd ..<CR>:call OutputDirName("BACK TO: ")<CR>
 " Forward to <let user enter dir>
 nnoremap <Leader>./ :cd<Space>
 " Change LOCAL working directory to current file
-nnoremap <Leader>.cur :lcd %:p:h<CR>:call OutputDirName("LOCAL DIRECTORY: ")<CR>
+nnoremap <Leader>.cur :lcd %:p:h<CR>:call OutputDirName("LOCAL DIR: ")<CR>
 " Change GLOBAL working directory to current file
-nnoremap <Leader>.cg :cd %:p:h<CR>:call OutputDirName("DIRECTORY: ")<CR>
+nnoremap <Leader>.cg :cd %:p:h<CR>:call OutputDirName("GLOBAL DIR: ")<CR>
 
 " PERSONAL QUICK ACCESS: (Delete these! Make your own!)-----------------------
 " Directories
@@ -152,10 +153,10 @@ nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 
 " FUNCTION FOR QUICK ACCESS:--------------------------------------------------
 fun! OutputDirName(message)
-    execute 'echom a:message . "\\" . split(getcwd(),"\\")[-2] . "\\" . split(getcwd(),"\\")[-1]'
+    execute 'echom a:message . split(getcwd(),"\\")[-2] . "\\" . split(getcwd(),"\\")[-1]'
 endfun
 fun! OutputFName(message)
-    execute 'echom a:message . "\\" . split(getcwd(),"\\")[-2] . "\\" . expand("%:t")'
+    execute 'echom a:message . split(getcwd(),"\\")[-2] . "\\" . expand("%:t")'
 endfun
 
 " NOT USED:-------------------------------------------------------------------
@@ -168,7 +169,7 @@ endfun
 " let g:ctrlp_working_path_mode = 'rw'
 
 " Enable this line to disable the noerrmsg plugin and show errors again:
-let g:loaded_noerrmsg = 0
+" let g:loaded_noerrmsg = 0
 
 " FUNCTIONS:------------------------------------------------------------------
 fun! AnyBuffersModified()
@@ -195,4 +196,13 @@ fun! AnyBuffersModified()
     endif
 endfun
 
-
+" Do not display completion messages
+" Patch: https://groups.google.com/forum/#!topic/vim_dev/WeBBjkXE8H8
+set noshowmode
+try
+  set shortmess+=c
+catch /^Vim\%((\a\+)\)\=:E539: Illegal character/
+  autocmd MyAutoCmd VimEnter *
+        \ highlight ModeMsg guifg=bg guibg=bg |
+        \ highlight Question guifg=bg guibg=bg
+endtry

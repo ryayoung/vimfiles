@@ -12,14 +12,8 @@ let g:html_indent_script1 = "1" "Indents code inside <script> element
 let g:my_name = "Ryan Young"
 
 "Use this when starting a new html file. 
-nnoremap <buffer> <Leader>,, 
-    \i<!-- Author:  <Esc>"=g:my_name<CR>Pa --><CR><!-- Last modified:  <Esc>"=strftime("%m-%d-%y")<CR>Pa --><CR><!DOCTYPE html><CR>
-    \<html></html><Esc>%i<CR><Esc>O<head></head><Esc>%i<CR><Esc>O
-    \<style></style><Esc>o
-    \<script src=""></script><Esc>o
-    \<meta charset="utf-8"><CR><title></title><Esc>jo
-    \<body></body><Esc>%i<CR><Esc>O
-    \<script></script><Esc>O
+nnoremap <buffer> <silent> <Leader>,, :call InsertTemplate()<CR>
+nnoremap <buffer> <silent> <Leader>,j :call InsertJQueryScript()<CR>
 
 " Deletes current tag. Use when hovering over '<'
 nnoremap <buffer> <Leader>,d1 vf>d<Esc>
@@ -28,4 +22,26 @@ nnoremap <buffer> <Leader>,d2 i`<Esc>lvf>d<Esc>hf<vf>d<Esc>F`x
 
 iabbrev <buffer> <!-- <!-- --><Left><Left><Left><Left>
 iabbrev <buffer> <em> <em></em><Left><Left><Left><Left><Left>
+
+
+fun! InsertTemplate()
+  exe "normal! G"
+  let l:line = line('.')
+  call setline(l:line+1, "<!DOCTYPE html>")
+  call setline(l:line+2, '<html lang="en-US">')
+  call setline(l:line+3, "  <head>")
+  call setline(l:line+4, '    <link rel="stylesheet" href="">')
+  call setline(l:line+5, '    <script src=""></script>')
+  call setline(l:line+6, '    <meta charset="utf-8">')
+  call setline(l:line+7, "  </head>")
+  call setline(l:line+8, "  <body>")
+  call setline(l:line+9, "    ")
+  call setline(l:line+10, "  </body>")
+  call setline(l:line+11, "</html>")
+endfun
+
+fun! InsertJQueryScript()
+  exe "normal! o"
+  call setline('.', '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
+endfun
 

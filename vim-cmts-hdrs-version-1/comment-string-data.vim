@@ -1,6 +1,10 @@
 " Maintainer:     Ryan Young
 " Last Modified:  Nov 06, 2021
 
+" This is really stupid. When writing this plugin, I didn't realize Vim stored
+" comment strings as options settings. So, this document is completely
+" unnecessary.
+
 " Here is the comment syntax for most languages: https://rosettacode.org/wiki/Comments#Go
 " Add more to this list if you're using a language not listed here
 

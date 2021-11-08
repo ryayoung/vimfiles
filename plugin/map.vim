@@ -1,14 +1,14 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 06, 2021
+" Last Modified:  Nov 07, 2021
 
 " Save
-nnoremap <Leader>s :w<CR>
+nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
 " Quit current window
 nnoremap <Leader>q :q<CR>
 " Save and Quit ALL windows
 nnoremap <Leader>Q :wqa<CR>
 " Save and source file. Use this when editing vimrc for your changes to take effect
-nnoremap <Leader>2 :w<bar> :source %<CR>
+nnoremap <Leader>2 :w<bar> :source %<CR>:call OutputFile("SOURCED: ")<CR>
 
 " Quickly navigate up or down 15 lines
 nnoremap 1j 15j
@@ -81,6 +81,9 @@ nnoremap <silent> <Leader>= :vertical resize +20<CR>
 nnoremap <silent> <Leader>[ :resize -15<CR>
 nnoremap <silent> <Leader>] :resize +15<CR>
 
+fun! OutputFile(message)
+    execute 'echom a:message . split(expand("%:p:h"),"\\")[-2] . "\\" . expand("%:t")'
+endfun
 
 " Smart delete/change inside/around
 " Create a plugin where, when you try to change or delete inside/around
