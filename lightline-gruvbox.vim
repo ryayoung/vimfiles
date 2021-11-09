@@ -104,7 +104,13 @@ if s:style == 'plain'
 				\ [s:mono0, s:mono4, s:c_mono0, s:c_mono4]]
 else
 	let s:p.normal.middle = [
-				\ [s:mono4, s:mono1, s:c_mono4, s:c_mono1]]
+				\ [s:green, s:mono1, s:c_mono4, s:c_mono1]]
+	let s:p.insert.middle = [
+				\ [s:blue, s:mono1, s:c_mono4, s:c_mono1]]
+	let s:p.visual.middle = [
+				\ [s:orange, s:mono1, s:c_mono4, s:c_mono1]]
+" 	let s:p.normal.middle = [
+" 				\ [s:mono4, s:mono1, s:c_mono4, s:c_mono1]]
 	if s:style == 'hard_left'
 		let s:p.normal.left = [
 					\ [s:mono0, s:green, s:c_mono0, s:c_green],
