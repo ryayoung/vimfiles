@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 08, 2021
+" Last Modified:  Nov 09, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -79,7 +79,7 @@ let g:gruvbox_contrast_dark='soft'
 if strftime('%H') > 17 || strftime('%H') < 5
     set background=dark
 else
-    "set background=light
+    " set background=light
     set background=dark
 endif
 " Change background between light and dark modes
@@ -171,7 +171,7 @@ endfun
 " let g:ctrlp_working_path_mode = 'rw'
 
 " Enable this line to disable the noerrmsg plugin and show errors again:
-" let g:loaded_noerrmsg = 0
+let g:loaded_noerrmsg = 0
 
 " FUNCTIONS:------------------------------------------------------------------
 fun! AnyBuffersModified()

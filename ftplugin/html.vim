@@ -12,7 +12,7 @@ let g:html_indent_script1 = "1" "Indents code inside <script> element
 let g:my_name = "Ryan Young"
 
 "Use this when starting a new html file. 
-nnoremap <buffer> <silent> <Leader>,, :call InsertTemplate()<CR>
+nnoremap <buffer> <silent> <Leader>,, :call InsertTemplateFull()<CR>
 nnoremap <buffer> <silent> <Leader>,j :call InsertJQueryScript()<CR>
 
 " Deletes current tag. Use when hovering over '<'
@@ -24,14 +24,14 @@ iabbrev <buffer> <!-- <!-- --><Left><Left><Left><Left>
 iabbrev <buffer> <em> <em></em><Left><Left><Left><Left><Left>
 
 
-fun! InsertTemplate()
+fun! InsertTemplatePlain()
   exe "normal! G"
   let l:line = line('.')
   call setline(l:line+1, "<!DOCTYPE html>")
   call setline(l:line+2, '<html lang="en-US">')
   call setline(l:line+3, "  <head>")
   call setline(l:line+4, '    <link rel="stylesheet" href="">')
-  call setline(l:line+5, '    <script src=""></script>')
+  call setline(l:line+5, '    <script src="" async></script>')
   call setline(l:line+6, '    <meta charset="utf-8">')
   call setline(l:line+7, "  </head>")
   call setline(l:line+8, "  <body>")
@@ -40,8 +40,36 @@ fun! InsertTemplate()
   call setline(l:line+11, "</html>")
 endfun
 
+fun! InsertTemplateFull()
+  exe "normal! G"
+  let l:line = line('.')
+  call setline(l:line+1, "<!DOCTYPE html>")
+  call setline(l:line+2, '<html lang="en-US">')
+  call setline(l:line+3, "  <head>")
+  call setline(l:line+4, '    <link rel="stylesheet" href="style.css">')
+  call setline(l:line+5, '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>')
+  call setline(l:line+6, '    <script src="script.js" async></script>')
+  call setline(l:line+7, '    <meta charset="utf-8">')
+  call setline(l:line+8, "  </head>")
+  call setline(l:line+9, "  <body>")
+  call setline(l:line+10, "    ")
+  call setline(l:line+11, "  </body>")
+  call setline(l:line+12, "</html>")
+  call setcurpos(0, l:line, 4, 0, l:line)
+endfun
+
 fun! InsertJQueryScript()
+  let l:spaces = GetIndent()
   exe "normal! o"
-  call setline('.', '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
+  call setline('.', l:spaces . '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
+endfun
+
+
+fun! GetIndent()
+  let l:spaces = ""
+  for i in range(0,getcurpos()[2]-2)
+    let l:spaces = l:spaces . " "
+  endfor
+  return l:spaces
 endfun
 

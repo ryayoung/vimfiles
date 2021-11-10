@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 07, 2021
+" Last Modified:  Nov 09, 2021
 
 " Vim-Comments-and-Headers Plugin.
 " See the README.md for an explanation of this stuff
@@ -9,6 +9,11 @@
 " antoyo/vim-licenses is the kind of functionality I'm looking for.
 
 " autocmd FileType apache setlocal commentstring=#\ %s
+
+if exists("g:loaded_annotate") || v:version < 700
+    finish
+endif
+let g:loaded_annotate = 1
 
 " USER INTERACTION:-----------------------------------------------------------
 " Declare maps, if not set already by user
@@ -311,7 +316,7 @@ fun! SpecialFileSetup()
         call setline('.', "?>")
     endif
     if &filetype == 'html' && g:auto_html_setup == 1
-        call InsertHtmlTemplate()
+        call InsertHtmlTemplateFull()
     endif
 endfun
 
@@ -331,5 +336,22 @@ fun! InsertHtmlTemplate()
     call setline(l:line+11, "</html>")
 endfun
 
+fun! InsertHtmlTemplateFull()
+  exe "normal! G"
+  let l:line = line('.')
+  call setline(l:line+1, "<!DOCTYPE html>")
+  call setline(l:line+2, '<html lang="en-US">')
+  call setline(l:line+3, "  <head>")
+  call setline(l:line+4, '    <link rel="stylesheet" href="style.css">')
+  call setline(l:line+5, '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>')
+  call setline(l:line+6, '    <script src="script.js" async></script>')
+  call setline(l:line+7, '    <meta charset="utf-8">')
+  call setline(l:line+8, "  </head>")
+  call setline(l:line+9, "  <body>")
+  call setline(l:line+10, "    ")
+  call setline(l:line+11, "  </body>")
+  call setline(l:line+12, "</html>")
+  call setpos('.', [0, l:line+10, 4, 0])
+endfun
 
 " vim:set et sw=2:

@@ -1,10 +1,10 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 07, 2021
+" Last Modified:  Nov 09, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
 " Quit current window
-nnoremap <Leader>q :q<CR>
+nnoremap <silent> <Leader>q :call QuitIfEmpty()<CR>
 " Save and Quit ALL windows
 nnoremap <Leader>Q :wqa<CR>
 " Save and source file. Use this when editing vimrc for your changes to take effect
@@ -56,7 +56,7 @@ inoremap <C-BS> <C-W>
 
 " TERMINAL:--------------------------------------------------------
 " Open Powershell
-nnoremap <Leader>// :terminal powershell<CR>
+nnoremap <silent> <Leader>// :terminal powershell<CR>
 " PULL FROM GITHUB
 nnoremap <Leader>/pull :terminal powershell<CR>git pull<CR>
 " COMMIT TO GITHUB
@@ -83,6 +83,18 @@ nnoremap <silent> <Leader>] :resize +15<CR>
 
 fun! OutputFile(message)
     execute 'echom a:message . split(expand("%:p:h"),"\\")[-2] . "\\" . expand("%:t")'
+endfun
+
+fun! QuitIfEmpty()
+    if line("$") == 1
+                \ && match(getline('.'), "^\\s*$") == 0 
+                \ && &filetype != "netrw"
+        exe "q!"
+    elseif expand('%:t') == "!powershell"
+        exe "q"
+    elseif &filetype != ""
+        exe "wq"
+    endif
 endfun
 
 " Smart delete/change inside/around

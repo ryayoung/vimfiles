@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 08, 2021
+" Last Modified:  Nov 09, 2021
 
 " https://vim.fandom.com/wiki/Commenting_with_opfunc
 

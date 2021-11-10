@@ -27,7 +27,7 @@ if s:is_dark
 	let s:mono1   = '#3c3836'
 	let s:mono2   = '#504945'
 	let s:mono3   = '#665c54'
-	let s:mono4   = '#7c6f64'
+    let s:mono4   = '#7c6f64'
 	let s:mono5   = '#928374'
 	let s:c_mono1 = 237
 	let s:c_mono2 = 239
@@ -39,6 +39,9 @@ if s:is_dark
 	let s:green    = '#b8bb26'
 	let s:blue     = '#83a598'
 	let s:orange   = '#fe8019'
+	let s:yellow   = '#fabd2f'
+	let s:purple   = '#d3869b'
+	let s:aqua     = '#8ec07c'
 	let s:c_red    = 167
 	let s:c_green  = 142
 	let s:c_blue   = 109
@@ -59,12 +62,12 @@ else
 
 	let s:mono1   = '#ebdbb2'
 	let s:mono2   = '#d5c4a1'
-	let s:mono3   = '#bdae93'
-	let s:mono4   = '#a89984'
-	let s:mono5   = '#928374'
-	let s:c_mono1 = 223
-	let s:c_mono2 = 250
-	let s:c_mono3 = 248
+    let s:mono3   = '#bdae93'
+    let s:mono4   = '#a89984'
+    let s:mono5   = '#928374'
+    let s:c_mono1 = 223
+    let s:c_mono2 = 250
+    let s:c_mono3 = 248
 	let s:c_mono4 = 246
 	let s:c_mono5 = 244
 
@@ -72,8 +75,9 @@ else
 	let s:green    = '#79740e'
 	let s:blue     = '#076678'
 	let s:orange   = '#af3a03'
-
-
+	let s:yellow   = '#b57614'
+	let s:purple   = '#8f3f71'
+	let s:aqua     = '#427b58'
 
 	let s:c_red    = 88
 	let s:c_green  = 100
@@ -87,6 +91,8 @@ let s:p = {
 			\ 'insert':   {},
 			\ 'replace':  {},
 			\ 'visual':   {},
+			\ 'terminal': {},
+			\ 'command': {},
 			\ 'tabline':  {}}
 
 let s:style = exists('g:lightline_gruvbox_style')
@@ -104,34 +110,49 @@ if s:style == 'plain'
 				\ [s:mono0, s:mono4, s:c_mono0, s:c_mono4]]
 else
 	let s:p.normal.middle = [
-				\ [s:green, s:mono1, s:c_mono4, s:c_mono1]]
+				\ [s:yellow, s:mono1, s:c_mono4, s:c_mono1]]
 	let s:p.insert.middle = [
 				\ [s:blue, s:mono1, s:c_mono4, s:c_mono1]]
 	let s:p.visual.middle = [
 				\ [s:orange, s:mono1, s:c_mono4, s:c_mono1]]
+	let s:p.replace.middle = [
+				\ [s:red, s:mono1, s:c_mono4, s:c_mono1]]
+	let s:p.terminal.middle = [
+				\ [s:purple, s:mono1, s:c_mono4, s:c_mono1]]
+	let s:p.command.middle = [
+				\ [s:aqua, s:mono1, s:c_mono4, s:c_mono1]]
 " 	let s:p.normal.middle = [
 " 				\ [s:mono4, s:mono1, s:c_mono4, s:c_mono1]]
 	if s:style == 'hard_left'
 		let s:p.normal.left = [
-					\ [s:mono0, s:green, s:c_mono0, s:c_green],
+					\ [s:mono0, s:yellow, s:c_mono0, s:c_green],
 					\ [s:mono0, s:mono4, s:c_mono0, s:c_mono4]]
 	else
 		let s:p.normal.left = [
-					\ [s:mono0, s:green, s:c_mono0, s:c_green],
+					\ [s:mono0, s:yellow, s:c_mono0, s:c_green],
 					\ [s:mono0, s:mono4, s:c_mono5, s:c_mono3]]
 		"let s:p.normal.left = [
 		"			\ [s:mono0, s:green, s:c_mono0, s:c_green],
 		"			\ [s:mono5, s:mono3, s:c_mono5, s:c_mono3]]
 	endif
 	let s:p.normal.right = [
-				\ [s:mono0, s:green, s:c_mono0, s:c_green],
-				\ [s:mono0, s:green, s:c_mono0, s:c_green]]
+				\ [s:mono0, s:yellow, s:c_mono0, s:c_green],
+				\ [s:mono0, s:yellow, s:c_mono0, s:c_green]]
     let s:p.insert.right = [
                 \ [s:mono0, s:blue, s:c_mono0, s:c_blue],
                 \ [s:mono0, s:blue, s:c_mono0, s:c_blue]]
     let s:p.visual.right = [
                 \ [s:mono0, s:orange, s:c_mono0, s:c_orange],
                 \ [s:mono0, s:orange, s:c_mono0, s:c_orange]]
+    let s:p.replace.right = [
+                \ [s:mono0, s:red, s:c_mono0, s:c_red],
+                \ [s:mono0, s:red, s:c_mono0, s:c_red]]
+    let s:p.terminal.right = [
+                \ [s:mono0, s:purple, s:c_mono0, s:c_red],
+                \ [s:mono0, s:purple, s:c_mono0, s:c_red]]
+    let s:p.command.right = [
+                \ [s:mono0, s:aqua, s:c_mono0, s:c_red],
+                \ [s:mono0, s:aqua, s:c_mono0, s:c_red]]
 	"let s:p.normal.right = [
 				"\ [s:mono0, s:mono4, s:c_mono0, s:c_mono4],
 				"\ [s:mono0, s:mono4, s:c_mono0, s:c_mono4]]
@@ -154,6 +175,12 @@ let s:p.replace.left = [
 			\ s:p.normal.left[1]]
 let s:p.visual.left = [
 			\ [s:mono0, s:orange, s:c_mono0, s:c_orange],
+			\ s:p.normal.left[1]]
+let s:p.terminal.left = [
+			\ [s:mono0, s:purple, s:c_mono0, s:c_orange],
+			\ s:p.normal.left[1]]
+let s:p.command.left = [
+			\ [s:mono0, s:aqua, s:c_mono0, s:c_orange],
 			\ s:p.normal.left[1]]
 
 if s:style == 'plain'
