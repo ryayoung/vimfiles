@@ -1,0 +1,46 @@
+Maintainer:     Ryan Young
+Last Modified:  Nov 11, 2021
+
+*gruvdark*
+DARK 2
+red     cc241d
+greeen  98971a
+yellow  d79921
+blue    458588
+purple  b16286
+aqua    689d6a
+orange  d65d0e
+
+LIGHT 1
+red     fb4934
+greeen  b8bb26
+yellow  fabd2f
+blue    83a598
+purple  d3869b
+aqua    8ec07c
+orange  fe8019
+
+*gruvlight*
+LIGHT 3
+red     cc241d
+greeen  98971a
+yellow  d79921
+blue    458588
+purple  b16286
+aqua    689d6a
+orange  d65d0e
+
+DARK 4
+red     9d0006
+greeen  79740e
+yellow  b57614
+blue    076678
+purple  8f3f71
+aqua    427b58
+orange  af3a03
+
+
+
+
+
+vim:tw=78:ts=8:et:ft=help:norl:

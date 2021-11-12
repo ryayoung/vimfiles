@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 09, 2021
+" Last Modified:  Nov 10, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
@@ -86,12 +86,14 @@ fun! OutputFile(message)
 endfun
 
 fun! QuitIfEmpty()
-    if line("$") == 1
-                \ && match(getline('.'), "^\\s*$") == 0 
-                \ && &filetype != "netrw"
+    if &filetype == "netrw"
+        exe "q"
+    elseif line("$") == 1 && match(getline('.'), "^\\s*$") == 0 
         exe "q!"
     elseif expand('%:t') == "!powershell"
         exe "q"
+    elseif line("$") < 5 && empty(&filetype)
+        exe "q!"
     elseif &filetype != ""
         exe "wq"
     endif

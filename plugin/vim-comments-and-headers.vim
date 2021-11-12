@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 09, 2021
+" Last Modified:  Nov 11, 2021
 
 " Vim-Comments-and-Headers Plugin.
 " See the README.md for an explanation of this stuff
@@ -98,6 +98,10 @@ let g:alternate_comments = {
 " Every time we enter a buffer, set the global comment strings based on its
 " filetype, and see if we need to auto-generate a header
 au BufEnter * call SetCommentVars() | call CreateFirstHeader()
+
+" For each buffer, keep track of whether the date has been updated. Once it's
+" updated once, don't touch it again, obviously.
+au BufAdd,BufCreate,BufNew,BufReadPost * let b:date_updated = 0
 
 " Try to update the date each time we save a file
 au BufWritePre,FileWritePre * call UpdateHeaderDate()
@@ -273,7 +277,11 @@ endfun
 " user's name in the first line. If found, then add a new line with the
 " updated date, and let the user delete the old date line on their own.
 fun! UpdateHeaderDate()
-    if g:auto_update_date == 0 
+    let b:date_updated=get(b:, 'date_updated', 0)
+    if b:date_updated == 1
+        " Only update date once per buffer session
+        return
+    elseif g:auto_update_date == 0 
         " User has disabled this feature
         return
     elseif &modified == 0 
@@ -302,6 +310,8 @@ fun! UpdateHeaderDate()
 
         " Return cursor to it's absolute (not relative) position
         call setpos('.', save_cursor)
+        " Declare that the date for current buf has been updated
+        let b:date_updated = 1
     endif
 endfun
 

@@ -8,4 +8,4 @@ gcc	commentary.txt	/*gcc*
 gcgc	commentary.txt	/*gcgc*
 gcu	commentary.txt	/*gcu*
 o_gc	commentary.txt	/*o_gc*
-v_gc	commentary.txt	/*v_gc*
+/* v_gc	commentary.txt	/*v_gc* */

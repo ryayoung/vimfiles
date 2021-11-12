@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 09, 2021
+" Last Modified:  Nov 10, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -137,6 +137,19 @@ nnoremap <Leader>./ :cd<Space>
 nnoremap <Leader>.cur :lcd %:p:h<CR>:call OutputDirName("LOCAL DIR: ")<CR>
 " Change GLOBAL working directory to current file
 nnoremap <Leader>.cg :cd %:p:h<CR>:call OutputDirName("GLOBAL DIR: ")<CR>
+" SESSIONS:
+" Open Sessions
+nnoremap <leader>.1 :source ~\vimfiles\sessions\sesh1.vim<CR>
+nnoremap <leader>.2 :source ~\vimfiles\sessions\sesh2.vim<CR>
+nnoremap <leader>.3 :source ~\vimfiles\sessions\sesh3.vim<CR>
+" Save Sessions
+nnoremap <leader>.! :mks! ~/vimfiles/sessions/sesh1.vim<CR>
+nnoremap <leader>.@ :mks! ~/vimfiles/sessions/sesh2.vim<CR>
+nnoremap <leader>.# :mks! ~/vimfiles/sessions/sesh3.vim<CR>
+
+au VimEnter * call feedkeys(escape(":source ~/vimfiles/sessions/sesh1.vim", '\'))
+au FileType netrw setl bufhidden=delete
+au BufNewFile,BufRead * if empty(&filetype) | set filetype=none | setl buffhidden=delete | endif
 
 " PERSONAL QUICK ACCESS: (Delete these! Make your own!)-----------------------
 " Directories
