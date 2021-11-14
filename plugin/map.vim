@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 10, 2021
+" Last Modified:  Nov 13, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
@@ -13,6 +13,8 @@ nnoremap <Leader>2 :w<bar> :source %<CR>:call OutputFile("SOURCED: ")<CR>
 " Quickly navigate up or down 15 lines
 nnoremap 1j 15j
 nnoremap 1k 15k
+" Jump back and forth between files
+nnoremap <leader>b <c-^>
 
 " Open new horizontal split with empty file, AND select recently used files in CtrlP
 nnoremap <Leader>a :new<CR>:CtrlPMRU C:/<CR>
@@ -86,16 +88,14 @@ fun! OutputFile(message)
 endfun
 
 fun! QuitIfEmpty()
-    if &filetype == "netrw"
-        exe "q"
-    elseif line("$") == 1 && match(getline('.'), "^\\s*$") == 0 
+    if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 
         exe "q!"
-    elseif expand('%:t') == "!powershell"
-        exe "q"
     elseif line("$") < 5 && empty(&filetype)
         exe "q!"
-    elseif &filetype != ""
+    elseif index(['css','html','javascript','python','vim','php','vb','sql','java','text','markdown'], &filetype) >= 0
         exe "wq"
+    else
+        exe "q"
     endif
 endfun
 

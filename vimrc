@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 10, 2021
+" Last Modified:  Nov 13, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -50,6 +50,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tmsvg/pear-tree'
+Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
 " Plug 'ryayoung/vim-comments-and-headers'
 call plug#end()
@@ -149,7 +150,7 @@ nnoremap <leader>.# :mks! ~/vimfiles/sessions/sesh3.vim<CR>
 
 au VimEnter * call feedkeys(escape(":source ~/vimfiles/sessions/sesh1.vim", '\'))
 au FileType netrw setl bufhidden=delete
-au BufNewFile,BufRead * if empty(&filetype) | set filetype=none | setl buffhidden=delete | endif
+au BufNewFile,BufRead * if empty(&filetype) | set filetype=none | setl bufhidden=delete | endif
 
 " PERSONAL QUICK ACCESS: (Delete these! Make your own!)-----------------------
 " Directories
