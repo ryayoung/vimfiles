@@ -11,6 +11,8 @@ let g:html_indent_script1 = "1" "Indents code inside <script> element
 
 let g:my_name = "Ryan Young"
 
+noremap <buffer> <silent> s :w<CR>
+
 "Use this when starting a new html file. 
 nnoremap <buffer> <silent> <Leader>,, :call InsertTemplateFull()<CR>
 nnoremap <buffer> <silent> <Leader>,j :call InsertJQueryScript()<CR>
@@ -19,6 +21,7 @@ nnoremap <buffer> <silent> <Leader>,j :call InsertJQueryScript()<CR>
 nnoremap <buffer> <Leader>,d1 vf>d<Esc>
 " Deletes the current AND closing tag. Use when hovering over '<'
 nnoremap <buffer> <Leader>,d2 i`<Esc>lvf>d<Esc>hf<vf>d<Esc>F`x
+
 
 iabbrev <buffer> <!-- <!-- --><Left><Left><Left><Left>
 iabbrev <buffer> <em> <em></em><Left><Left><Left><Left><Left>

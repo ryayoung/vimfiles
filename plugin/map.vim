@@ -1,18 +1,21 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 13, 2021
+" Last Modified:  Nov 15, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
 " Quit current window
 nnoremap <silent> <Leader>q :call QuitIfEmpty()<CR>
 " Save and Quit ALL windows
-nnoremap <Leader>Q :wqa<CR>
+nnoremap <silent> <leader>Q :call SaveWorkspaceAndQuitAll()<CR>
 " Save and source file. Use this when editing vimrc for your changes to take effect
 nnoremap <Leader>2 :w<bar> :source %<CR>:call OutputFile("SOURCED: ")<CR>
 
 " Quickly navigate up or down 15 lines
 nnoremap 1j 15j
 nnoremap 1k 15k
+" Go down and up half page
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
 " Jump back and forth between files
 nnoremap <leader>b <c-^>
 
@@ -82,6 +85,12 @@ nnoremap <silent> <Leader>- :vertical resize -20<CR>
 nnoremap <silent> <Leader>= :vertical resize +20<CR>
 nnoremap <silent> <Leader>[ :resize -15<CR>
 nnoremap <silent> <Leader>] :resize +15<CR>
+
+
+fun! SaveWorkspaceAndQuitAll()
+    call feedkeys(escape(":mks! ~/vimfiles/sessions/sesh1.vim\<CR>", '\'))
+    exe "wqa"
+endfun
 
 fun! OutputFile(message)
     execute 'echom a:message . split(expand("%:p:h"),"\\")[-2] . "\\" . expand("%:t")'

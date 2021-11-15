@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 13, 2021
+" Last Modified:  Nov 15, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -103,7 +103,7 @@ nnoremap <Leader>cn :CtrlP getcwd()<CR>
 " EMMET:----------------------------------------------------------------------
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
-let g:user_emmet_leader_key='<C-k>'
+let g:user_emmet_leader_key='<C-l>'
  
 " LIGHTLINE:------------------------------------------------------------------
 let g:lightline = {}
