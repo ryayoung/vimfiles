@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 15, 2021
+" Last Modified:  Nov 17, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -159,9 +159,7 @@ nnoremap <Leader>.dw :cd ~\ryayoung\data-warehousing<CR>
 nnoremap <Leader>.auto :cd ~\ryayoung\karve-automation<CR>
 nnoremap <Leader>.web :cd ~\web-programming<CR>
 nnoremap <Leader>.plug :cd ~\vimfiles\plugged<CR>
-nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School<CR>
 nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1<CR>
-nnoremap <Leader>.www :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\COMP\ 3410\ WWW\ Programming<CR>
 nnoremap <Leader>.pm :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\INFO\ 3340\ Project\ Management<CR>
 nnoremap <Leader>.mgmt :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\MGMT\ 3000\ Policy\ Strategy<CR>
 " Files

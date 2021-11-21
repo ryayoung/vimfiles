@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 15, 2021
+" Last Modified:  Nov 17, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
@@ -93,7 +93,7 @@ fun! SaveWorkspaceAndQuitAll()
 endfun
 
 fun! OutputFile(message)
-    execute 'echom a:message . split(expand("%:p:h"),"\\")[-2] . "\\" . expand("%:t")'
+    execute 'echom a:message . split(expand("%:p:h"),"\\")[-1] . "\\" . expand("%:t")'
 endfun
 
 fun! QuitIfEmpty()
