@@ -1,9 +1,8 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 17, 2021
+" Last Modified:  Nov 28, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
-
 
 syntax on "Enables syntax highlighting. Very important
 filetype on
@@ -148,15 +147,18 @@ nnoremap <leader>.! :mks! ~/vimfiles/sessions/sesh1.vim<CR>
 nnoremap <leader>.@ :mks! ~/vimfiles/sessions/sesh2.vim<CR>
 nnoremap <leader>.# :mks! ~/vimfiles/sessions/sesh3.vim<CR>
 
+" Get ready to open session 1 by entering the source string into command line
 au VimEnter * call feedkeys(escape(":source ~/vimfiles/sessions/sesh1.vim", '\'))
+" For file explorer, delete buffer as soon as its hidden
 au FileType netrw setl bufhidden=delete
+" If there is no filetype, delete buffer as soon as its hidden
 au BufNewFile,BufRead * if empty(&filetype) | set filetype=none | setl bufhidden=delete | endif
 
 " PERSONAL QUICK ACCESS: (Delete these! Make your own!)-----------------------
 " Directories
 nnoremap <Leader>.ryayoung :cd ~\ryayoung<CR>
 nnoremap <Leader>.dw :cd ~\ryayoung\data-warehousing<CR>
-nnoremap <Leader>.auto :cd ~\ryayoung\karve-automation<CR>
+nnoremap <Leader>.auto :cd ~\ryayoung\karve-sample-database<CR>
 nnoremap <Leader>.web :cd ~\web-programming<CR>
 nnoremap <Leader>.plug :cd ~\vimfiles\plugged<CR>
 nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1<CR>
@@ -202,7 +204,6 @@ fun! AnyBuffersModified()
     if l:numUnnamedModified > 0
         echom "Unnamed buffer(s) modified: (" . l:numUnnamedModified . ")"
     endif
-
     if l:numModified > 0
         return 1
     else
@@ -212,11 +213,10 @@ endfun
 
 " Do not display completion messages
 " Patch: https://groups.google.com/forum/#!topic/vim_dev/WeBBjkXE8H8
-set noshowmode
-try
-  set shortmess+=c
-catch /^Vim\%((\a\+)\)\=:E539: Illegal character/
-  autocmd MyAutoCmd VimEnter *
-        \ highlight ModeMsg guifg=bg guibg=bg |
-        \ highlight Question guifg=bg guibg=bg
-endtry
+" try
+  " set shortmess+=c
+" catch /^Vim\%((\a\+)\)\=:E539: Illegal character/
+  " autocmd MyAutoCmd VimEnter *
+        " \ highlight ModeMsg guifg=bg guibg=bg |
+        " \ highlight Question guifg=bg guibg=bg
+" endtry

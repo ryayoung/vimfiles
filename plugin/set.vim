@@ -4,6 +4,8 @@
 set shell=powershell
 set shellcmdflag=-command
 
+set noshowmode " Don't show what mode you're in
+
 set guifont=Consolas:h9 "set font
 
 set lines=100 columns=125 "sets size of window that opens. (lines is set to a very high number so it will just always open at the height of your screen)
