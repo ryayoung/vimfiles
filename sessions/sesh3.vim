@@ -48,13 +48,11 @@ nnoremap <silent>  Q :call SaveWorkspaceAndQuitAll()
 nnoremap <silent>  q :call QuitIfEmpty()
 nnoremap  s :w:call OutputFile("WRITTEN: ")
 nnoremap  .boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html
-nnoremap  .mgmt :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\MGMT\ 3000\ Policy\ Strategy
-nnoremap  .pm :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\INFO\ 3340\ Project\ Management
 nnoremap  .du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1
-nnoremap  .plug :cd ~\vimfiles\plugged
-nnoremap  .web :cd ~\web-programming
+nnoremap  .web :cd ~\web-programming-2
+nnoremap  .lit :source ~\vimfiles\sessions\literature.vim
+nnoremap  .py :cd ~\Documents\python
 nnoremap  .auto :cd ~\ryayoung\karve-sample-database
-nnoremap  .dw :cd ~\ryayoung\data-warehousing
 nnoremap  .ryayoung :cd ~\ryayoung
 nnoremap  .# :mks! ~/vimfiles/sessions/sesh3.vim
 nnoremap  .@ :mks! ~/vimfiles/sessions/sesh2.vim
@@ -82,8 +80,6 @@ nnoremap  1l :set background=light
 nnoremap  u :UndotreeShow
 nnoremap  cx :vs.| :vertical resize 20jj
 nnoremap  cc :Vex| :vertical resize 20jj
-nnoremap 1k 15k
-nnoremap 1j 15j
 vnoremap < <gv
 vnoremap > >gv
 vnoremap J :m '>+1gv=gv
@@ -143,11 +139,11 @@ set autoindent
 set autoread
 set background=dark
 set backspace=indent,eol,start
-set directory=~/vimfiles/tmp//,.,~\\AppData\\Local\\Temp,c:\\tmp,c:\\temp
+set directory=~/vimfiles/tmp//,.,C:\\Users\\RYANYO~1\\AppData\\Local\\Temp,c:\\tmp,c:\\temp
 set encoding=utf-8
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
-set guifont=Consolas:h9
+set guifont=Consolas:h12
 set guioptions=egt
 set helplang=En
 set hidden
@@ -156,10 +152,7 @@ set incsearch
 set laststatus=2
 set runtimepath=~/vimfiles,~\\vimfiles\\plugged\\gruvbox,~\\vimfiles\\plugged\\typescript-vim,~\\vimfiles\\plugged\\ctrlp.vim,~\\vimfiles\\plugged\\undotree,~\\vimfiles\\plugged\\vim-simple-complete,~\\vimfiles\\plugged\\vim-uppercase-sql,~\\vimfiles\\plugged\\vim-repeat,~\\vimfiles\\plugged\\lightline.vim,~\\vimfiles\\plugged\\lightline-gruvbox.vim,~\\vimfiles\\plugged\\emmet-vim,~\\vimfiles\\plugged\\pear-tree,~\\vimfiles\\plugged\\vim-surround,C:\\Program\ Files\ (x86)\\Vim/vimfiles,C:\\Program\ Files\ (x86)\\Vim\\vim82,C:\\Program\ Files\ (x86)\\Vim/vimfiles/after,~\\vimfiles\\plugged\\pear-tree\\after,~/vimfiles/after
 set scrolloff=4
-set shell=powershell
-set shellcmdflag=-command
 set shiftwidth=4
-set shortmess=filnxtToOSc
 set noshowmode
 set smartcase
 set smartindent
@@ -170,63 +163,21 @@ set tabline=%!lightline#tabline()
 set tabstop=4
 set undodir=~/vimfiles/undodir
 set undofile
-set window=99
+set window=51
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~\vimfiles
+cd ~
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
 argglobal
 %argdel
-edit vimrc
+edit OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\week1.txt
 argglobal
-balt vimrc
-let s:cpo_save=&cpo
-set cpo&vim
-imap <buffer> <BS> <Plug>(PearTreeBackspace)
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeSpace) pear_tree#insert_mode#Space()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeJNR) pear_tree#insert_mode#JumpNReturn()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeJump) pear_tree#insert_mode#JumpOut()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeExpandOne) pear_tree#insert_mode#ExpandOne()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeFinishExpansion) pear_tree#insert_mode#Expand()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeExpand) pear_tree#insert_mode#PrepareExpansion()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeBackspace) pear_tree#insert_mode#Backspace()
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeCloser_}) pear_tree#insert_mode#HandleCloser('}')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeOpener_{) pear_tree#insert_mode#TerminateOpener('{')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeCloser_)) pear_tree#insert_mode#HandleCloser(')')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeOpener_() pear_tree#insert_mode#TerminateOpener('(')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeOpener_') pear_tree#insert_mode#TerminateOpener('''')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeCloser_]) pear_tree#insert_mode#HandleCloser(']')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeOpener_[) pear_tree#insert_mode#TerminateOpener('[')
-inoremap <buffer> <silent> <expr> <Plug>(PearTreeOpener_") pear_tree#insert_mode#TerminateOpener('"')
-vnoremap <buffer> <silent> [" :exe "normal! gv"|call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
-nnoremap <buffer> <silent> [" :call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
-vnoremap <buffer> <silent> [] m':exe "normal! gv"|call search('^\s*end\(f\%[unction]\|def\)\>', "bW")
-nnoremap <buffer> <silent> [] m':call search('^\s*end\(f\%[unction]\|def\)\>', "bW")
-vnoremap <buffer> <silent> [[ m':exe "normal! gv"|call search('^\s*\(fu\%[nction]\|def\)\>', "bW")
-nnoremap <buffer> <silent> [[ m':call search('^\s*\(fu\%[nction]\|def\)\>', "bW")
-vnoremap <buffer> <silent> ]" :exe "normal! gv"|call search('^\(\s*".*\n\)\@<!\(\s*"\)', "W")
-nnoremap <buffer> <silent> ]" :call search('^\(\s*".*\n\)\@<!\(\s*"\)', "W")
-vnoremap <buffer> <silent> ][ m':exe "normal! gv"|call search('^\s*end\(f\%[unction]\|def\)\>', "W")
-nnoremap <buffer> <silent> ][ m':call search('^\s*end\(f\%[unction]\|def\)\>', "W")
-vnoremap <buffer> <silent> ]] m':exe "normal! gv"|call search('^\s*\(fu\%[nction]\|def\)\>', "W")
-nnoremap <buffer> <silent> ]] m':call search('^\s*\(fu\%[nction]\|def\)\>', "W")
-imap <buffer>  <Plug>(PearTreeExpand)
-imap <buffer>  <Plug>(PearTreeFinishExpansion)
-imap <buffer> " <Plug>(PearTreeOpener_")
-imap <buffer> ' <Plug>(PearTreeOpener_')
-imap <buffer> ( <Plug>(PearTreeOpener_()
-imap <buffer> ) <Plug>(PearTreeCloser_))
-imap <buffer> [ <Plug>(PearTreeOpener_[)
-imap <buffer> ] <Plug>(PearTreeCloser_])
-imap <buffer> { <Plug>(PearTreeOpener_{)
-imap <buffer> } <Plug>(PearTreeCloser_})
-let &cpo=s:cpo_save
-unlet s:cpo_save
+balt OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\week2.txt
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -243,27 +194,29 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
-setlocal commentstring=\"%s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
+setlocal concealcursor=nc
+setlocal conceallevel=2
 setlocal completefunc=
 setlocal completeslash=
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
-setlocal nocursorline
-setlocal cursorlineopt=both
+set cursorline
+setlocal cursorline
+set cursorlineopt=number
+setlocal cursorlineopt=number
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'vim'
-setlocal filetype=vim
+if &filetype != 'help'
+setlocal filetype=help
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -277,7 +230,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=tcroql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -285,12 +238,12 @@ setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=GetVimIndent()
-setlocal indentkeys=0{,0},0),0],:,!^F,o,O,e,=end,=},=else,=cat,=finall,=END,0\\,0=\"\\\ 
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255,#
+setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=:help
-setlocal nolinebreak
+setlocal linebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
@@ -323,7 +276,7 @@ setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
-setlocal nospell
+setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
@@ -332,8 +285,8 @@ setlocal statusline=%{lightline#link()}%#LightlineLeft_active_0#%(\ %{lightline#
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'vim'
-setlocal syntax=vim
+if &syntax != 'help'
+setlocal syntax=help
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -352,29 +305,33 @@ setlocal wincolor=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 set nowrap
-setlocal nowrap
+setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 178 - ((54 * winheight(0) + 29) / 59)
+let s:l = 18 - ((16 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 178
+keepjumps 18
 normal! 0
 tabnext 1
-badd +0 vimrc
-badd +7 plugin\set.vim
+badd +0 OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\week1.txt
+badd +1 OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\week2.txt
+badd +1 OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\week3.txt
+badd +1 OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\paper1.txt
+badd +1 OneDrive\ -\ University\ of\ Denver\School\Y4Q1\ENGL\ 2130\ World\ Literature\work\paper2.txt
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToOSc
+set winheight=1 winwidth=20 shortmess=filnxtToOS
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 30, 2021
+" Last Modified:  Dec 01, 2021
 
 " set shell=powershell
 " set shell=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
@@ -8,9 +8,9 @@
 
 set noshowmode " Don't show what mode you're in
 
-set cursorline " Highlight the line that the cursor is on
+set cursorline cursorlineopt=number " Highlight the line that the cursor is on
 
-set guifont=Consolas:h9 "set font
+set guifont=Consolas:h10 "set font
 
 set lines=100 columns=125 "sets size of window that opens. (lines is set to a very high number so it will just always open at the height of your screen)
 
