@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 11, 2021
+" Last Modified:  Nov 30, 2021
 
 " Vim-Comments-and-Headers Plugin.
 " See the README.md for an explanation of this stuff
@@ -212,6 +212,8 @@ endfun
 fun! CreateFirstHeader()
     if g:auto_header == 0
         " User has disabled this feature
+        return
+    elseif &filetype == "output"
         return
     " If there is only a single line in the file, AND that line is empty,
     " AND the filetype is known, AND the file is not type CSV

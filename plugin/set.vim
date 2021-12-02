@@ -1,10 +1,14 @@
-" Author: Ryan Young
-" Last modified: 11-03-21
+" Maintainer:     Ryan Young
+" Last Modified:  Nov 30, 2021
 
-set shell=powershell
-set shellcmdflag=-command
+" set shell=powershell
+" set shell=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
+" set shellcmdflag=-command
+" set shellquote= \"
 
 set noshowmode " Don't show what mode you're in
+
+set cursorline " Highlight the line that the cursor is on
 
 set guifont=Consolas:h9 "set font
 

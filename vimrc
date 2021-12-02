@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 28, 2021
+" Last Modified:  Nov 30, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -157,13 +157,11 @@ au BufNewFile,BufRead * if empty(&filetype) | set filetype=none | setl bufhidden
 " PERSONAL QUICK ACCESS: (Delete these! Make your own!)-----------------------
 " Directories
 nnoremap <Leader>.ryayoung :cd ~\ryayoung<CR>
-nnoremap <Leader>.dw :cd ~\ryayoung\data-warehousing<CR>
 nnoremap <Leader>.auto :cd ~\ryayoung\karve-sample-database<CR>
-nnoremap <Leader>.web :cd ~\web-programming<CR>
-nnoremap <Leader>.plug :cd ~\vimfiles\plugged<CR>
+nnoremap <Leader>.py :cd ~\Documents\python<CR>
+nnoremap <leader>.lit :source ~\vimfiles\sessions\literature.vim<CR>
+nnoremap <Leader>.web :cd ~\web-programming-2<CR>
 nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1<CR>
-nnoremap <Leader>.pm :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\INFO\ 3340\ Project\ Management<CR>
-nnoremap <Leader>.mgmt :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1\MGMT\ 3000\ Policy\ Strategy<CR>
 " Files
 nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 
@@ -220,3 +218,5 @@ endfun
         " \ highlight ModeMsg guifg=bg guibg=bg |
         " \ highlight Question guifg=bg guibg=bg
 " endtry
+
+

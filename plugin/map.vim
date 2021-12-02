@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 17, 2021
+" Last Modified:  Nov 30, 2021
 
 " Save
 nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
@@ -10,9 +10,6 @@ nnoremap <silent> <leader>Q :call SaveWorkspaceAndQuitAll()<CR>
 " Save and source file. Use this when editing vimrc for your changes to take effect
 nnoremap <Leader>2 :w<bar> :source %<CR>:call OutputFile("SOURCED: ")<CR>
 
-" Quickly navigate up or down 15 lines
-nnoremap 1j 15j
-nnoremap 1k 15k
 " Go down and up half page
 nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
@@ -36,6 +33,7 @@ vnoremap <Leader>co "+y
 
 " Open graphical file explorer (You can press escape to exit it)
 nnoremap <Leader>` :browse e ~/<CR>
+
 
 
 " shift visual lines up and down
@@ -86,11 +84,12 @@ nnoremap <silent> <Leader>= :vertical resize +20<CR>
 nnoremap <silent> <Leader>[ :resize -15<CR>
 nnoremap <silent> <Leader>] :resize +15<CR>
 
-
 fun! SaveWorkspaceAndQuitAll()
-    call feedkeys(escape(":mks! ~/vimfiles/sessions/sesh1.vim\<CR>", '\'))
+    " exe "call feedkeys(escape(':mks! ~/vimfiles/sessions/sesh1.vim\<CR>', '\'))"
+    " echo "SAVED SESSION 1"
     exe "wqa"
 endfun
+
 
 fun! OutputFile(message)
     execute 'echom a:message . split(expand("%:p:h"),"\\")[-1] . "\\" . expand("%:t")'
@@ -102,6 +101,8 @@ fun! QuitIfEmpty()
     elseif line("$") < 5 && empty(&filetype)
         exe "q!"
     elseif index(['css','html','javascript','python','vim','php','vb','sql','java','text','markdown'], &filetype) >= 0
+        exe "wq"
+    elseif &filetype == 'help' && &readonly == 0
         exe "wq"
     else
         exe "q"
@@ -144,3 +145,5 @@ endfun
 " nnoremap di' f'di'
 " nnoremap ca' f'ca'
 " nnoremap da' f'da'
+
+
