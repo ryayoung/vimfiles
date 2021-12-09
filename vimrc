@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Nov 30, 2021
+" Last Modified:  Dec 04, 2021
 
 " Main configuration file for vim. Many more commands can be found in sets.vim
 " and maps.vim inside the plugin folder.
@@ -162,6 +162,7 @@ nnoremap <Leader>.py :cd ~\Documents\python<CR>
 nnoremap <leader>.lit :source ~\vimfiles\sessions\literature.vim<CR>
 nnoremap <Leader>.web :cd ~\web-programming-2<CR>
 nnoremap <Leader>.du :cd ~\Onedrive\ -\ University\ of\ Denver\School\Y4Q1<CR>
+nnoremap <Leader>.doc :cd ~\Onedrive\ -\ University\ of\ Denver\Docs<CR>
 " Files
 nnoremap <Leader>.boot :e ~\web-programming\misc\BOOTSTRAP-TEMPLATE.html<CR>
 
