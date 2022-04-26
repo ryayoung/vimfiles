@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/ryanyoung/Documents/school/Capstone/packages/chart-tools/.git'
+let g:netrw_dirhist_3='/Users/ryanyoung/ryayoung/youtube/youtube'
+let g:netrw_dirhist_2='/Users/ryanyoung/ryayoung/learning-rust/monte_carlo_pi/rust/monte_carlo_pi/src'
+let g:netrw_dirhist_1='/Users/ryanyoung/ryayoung/web-ii/starter-project/client/components/interfaces'
+let g:netrw_dirhist_0='/Users/ryanyoung/ryayoung/web-ii/starter-project'
+let g:netrw_dirhist_9='/Users/ryanyoung/ryayoung/web-ii/starter-project/client'
+let g:netrw_dirhist_8='/Users/ryanyoung/ryayoung/web-ii/starter-project/client/app'
+let g:netrw_dirhist_7='/Users/ryanyoung/ryayoung/web-ii/starter-project/client'
+let g:netrw_dirhist_6='/Users/ryanyoung/ryayoung/web-ii/starter-project'
+let g:netrw_dirhist_5='/Users/ryanyoung/ryayoung/web-ii/starter-project/client/app/main'
