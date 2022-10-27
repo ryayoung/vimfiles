@@ -1,21 +1,21 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Apr 16, 2022
+" Last Modified:  Oct 09, 2022
 
 " Save
-nnoremap <Leader>s :w<CR>:call OutputFName("WRITTEN: ")<CR>
+nnoremap <Leader>s :w<CR>:call OutputFile("WRITTEN: ")<CR>
 " Quit current window
 nnoremap <silent> <Leader>q :call QuitIfEmpty()<CR>
 " Save and Quit ALL windows
 nnoremap <silent> <leader>Q :call SaveWorkspaceAndQuitAll()<CR>
 " Save and source file. Use this when editing vimrc for your changes to take effect
-nnoremap <Leader>2 :w<bar> :source %<CR>:call OutputFName("SOURCED: ")<CR>
+nnoremap <Leader>2 :w<bar> :source %<CR>:call OutputFile("SOURCED: ")<CR>
 
 " Repeat last shell command
 nnoremap <Leader>f @:
 
 " Jump between paragraphs quickly
-nnoremap <C-j> }
-nnoremap <C-k> {
+nnoremap <C-j> 15j
+nnoremap <C-k> 15k
 
 " Jump back and forth between files
 nnoremap <leader>b <c-^>
@@ -25,15 +25,15 @@ nnoremap <Leader>a :new<CR>:CtrlPMRU C:/<CR>
 " Open new vertical split with empty file, AND select recently used files in CtrlP
 nnoremap <Leader>A :vnew<CR>:CtrlPMRU C:/<CR>
 " Open new tab in vim (you can swap between tabs by pressing gt)
-nnoremap <Leader>T :tabnew<CR>
+nnoremap <Leader>t :tabnew<CR>
 
 "Access window commands not already mapped here. This maps to Ctrl-w
 nnoremap <Leader>w <C-w>
 
 " Paste from sys clipboard
-nnoremap <Leader>pa "+p
+" nnoremap <Leader>pa "+p
 " Copy to sys clipboard
-vnoremap <Leader>co "+y
+" vnoremap <Leader>co "+y
 
 " Open graphical file explorer (You can press escape to exit it)
 nnoremap <Leader>` :browse e ~/<CR>
@@ -57,7 +57,7 @@ nnoremap <Leader>3 @q
 nnoremap <Leader>5 :call ChangeAccent()<CR>
 
 " Exit closing brackets/braces/etc with TAB
-inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
+" inoremap <expr> <Tab> search('\%#[]>")}]', 'n') ? '<Right>' : '<Tab>'
 
 " Easily delete previous word while typing using Ctrl-backspace 
 inoremap <C-BS> <C-W>
@@ -73,8 +73,19 @@ nnoremap <Leader>m :call OpenNextFile(-1)<CR>
 " Execute Python in new buffer
 nnoremap <Leader>r :call ExecutePythonNewBuffer()<CR>
 
-" Python smart print
-" inoremap t t<Esc>:call CheckBehindCursorForPrint()<CR>a
+" Quit bottom buffer
+nnoremap <leader>R <C-w>j<C-w>j:q<CR><C-w>k
+
+" Line spacing
+nnoremap <leader>SP1 :set linespace=0<CR>
+nnoremap <leader>SP2 :set linespace=3<CR>
+nnoremap <leader>SP3 :set linespace=4<CR>
+nnoremap <leader>SP4 :set linespace=5<CR>
+nnoremap <leader>SP5 :set linespace=6<CR>
+
+" Change background between light and dark modes
+nnoremap <Leader>1l :set background=light<CR>
+nnoremap <Leader>1d :set background=dark<CR>
 
 " TERMINAL:--------------------------------------------------------
 " Open terminal
@@ -84,92 +95,26 @@ nnoremap <Leader>/pull :terminal<CR>git pull<CR>
 " Activate python virtual environment (must be inside proj folder, and environment must be called "env")
 nnoremap <Leader>/py :terminal<CR>source env/bin/activate<CR>
 
+" PYTHON:----------------------------------------------------------
+nnoremap <silent> <leader>pt it_start = time.time()<CR>print(time.time() - t_start)<Esc>ddk
+" nnoremap <silent> <leader>pP iprint(time.time() - t_start)<Esc>I<Esc>
+
 "WINDOW MANIPULATION:----------------------------------------------
-"Move cursor to adjacent windows
+" Move cursor to adjacent windows
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
-"Move windows 
+" Move windows 
 nnoremap <silent> <Leader>H :wincmd H<CR>
 nnoremap <silent> <Leader>J :wincmd J<CR>
 nnoremap <silent> <Leader>K :wincmd K<CR>
 nnoremap <silent> <Leader>L :wincmd L<CR>
-"Resize windows
+" Resize windows
 nnoremap <silent> <Leader>- :vertical resize -20<CR>
 nnoremap <silent> <Leader>= :vertical resize +20<CR>
 nnoremap <silent> <Leader>[ :resize -15<CR>
 nnoremap <silent> <Leader>] :resize +15<CR>
-
-fun! SaveWorkspaceAndQuitAll()
-    " exe "call feedkeys(escape(':mks! ~/vimfiles/sessions/sesh1.vim\<CR>', '\'))"
-    " echo "SAVED SESSION 1"
-    exe "wqa"
-endfun
-
-
-" fun! OutputFile(message)
-    " execute 'echom a:message . split(expand("%:p:h"),"\\")[-1] . "\\" . expand("%:t")'
-" endfun
-
-fun! QuitIfEmpty()
-    if line("$") == 1 && match(getline('.'), "^\\s*$") == 0 
-        exe "q!"
-    elseif line("$") < 5 && empty(&filetype)
-        exe "q!"
-    elseif index(['css','html','javascript','python','vim','php','vb','sql','java','text','markdown'], &filetype) >= 0
-        exe "wq"
-    elseif &filetype == 'help' && &readonly == 0
-        exe "wq"
-    else
-        exe "q"
-    endif
-endfun
-
-" Smart delete/change inside/around
-" Create a plugin where, when you try to change or delete inside/around
-" something, vim first checks whether your cursor is actually inside (or at
-" the start of) the enclosure you're trying to edit. If you're not inside one
-" on the current line, then use feedkeys('f(') to try and jump to an
-" enclosure. Then, make a second attempt to execute the change/delete 
-" inside/around command.
-" nnoremap ci[ f[ci[
-" nnoremap di[ f[di[
-" nnoremap ca[ f[ca[
-" nnoremap da[ f[da[
-" 
-" nnoremap ci( f(ci(
-" nnoremap di( f(di(
-" nnoremap ca( f(ca(
-" nnoremap da( f(da(
-" 
-" nnoremap ci{ f{ci{
-" nnoremap di{ f{di{
-" nnoremap ca{ f{ca{
-" nnoremap da{ f{da{
-" 
-" nnoremap ci< f<ci<
-" nnoremap di< f<di<
-" nnoremap ca< f<ca<
-" nnoremap da< f<da<
-" 
-" nnoremap ci" f"ci"
-" nnoremap di" f"di"
-" nnoremap ca" f"ca"
-" nnoremap da" f"da"
-" 
-" nnoremap ci' f'ci'
-" nnoremap di' f'di'
-" nnoremap ca' f'ca'
-" nnoremap da' f'da'
-
-fun! CheckBehindCursorForPrint()
-    " Auto completes python print statement
-    if getline('.') == "print"
-        call setline(line('.'), 'print(f"{}")')
-        call feedkeys("\<Esc>A\<Esc>hhi")
-    elseif getline('.') == "    print"
-        call setline(line('.'), '    print(f"{}")')
-        call feedkeys("\<Esc>A\<Esc>hhi")
-    endif
-endfun
+" Move Tabs
+nnoremap <silent> > :tabn<CR>
+nnoremap <silent> < :tabp<CR>

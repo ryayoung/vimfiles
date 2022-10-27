@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Feb 23, 2022
+" Last Modified:  May 20, 2022
 
 fun! ExecutePythonNewBuffer()
     " SOURCE [reusable window]: https://github.com/fatih/vim-go/blob/master/autoload/go/ui.vim

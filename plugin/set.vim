@@ -1,18 +1,24 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Apr 17, 2022
-
-set noshowmode " Don't show what mode you're in
-
-set cursorline
-" set cursorlineopt=number " Highlight the line that the cursor is on
-
-" set guifont=Consolas:h12r"set font
-set guifont=Hack\ Nerd\ Font:h14
+" Last Modified:  Aug 26, 2022
 
 " Disable startup welcome screen
 set shm+=I
 
-" set lines=125 columns=215
+" Tells Vim to place all your swap files there, so your working directory stays clean.
+" For this to work, you MUST create a /swapfiles dir inside vimfiles.
+set swapfile
+set directory^=$HOME/.vim/swapfiles//
+
+set number "enable line numbering
+set noshowmode " Don't show what mode you're in. (Use this when using lightline plugin)
+
+set cursorline " Highlight the line the cursor is on
+
+" set guifont=Consolas:h12r"set font
+set guifont=Hack\ Nerd\ Font:h13
+
+set linespace=5 " Line spacing
+
 set lines=125 columns=105 "sets size of window that opens. (lines is set to a very high number so it will just always open at the height of your screen)
 
 set guioptions-=m "remove menu bar
@@ -48,7 +54,5 @@ set undodir=~/vimfiles/undodir "Defines the directory in which Vim stores your u
 set undofile "Tells vim to create an undo file. In this case, it gets stored in the dir. defined above
 set incsearch "When searching with "/", results will be highlighted AS you're searching, rather than waiting till you press enter
 set encoding=utf-8 "vim defaults to latin1, but will change based on locale of your environment.
-"set exrc "uses vimrc from directory you open file from                                            
-"set noswapfile "Swap files store changes made to buffer in case of crash. They're annoying. Instead, I store swp files in my vimfiles/tmp directory
-"set autochdir "sets directory to that of current file. (disabled because I instead use :cd %:p:h (change local dir to current window) and :Vex (explore files in current file's dir). Both are remapped in vimrc)
+" set autochdir "sets directory to that of current file.
 
