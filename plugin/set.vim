@@ -1,5 +1,5 @@
 " Maintainer:     Ryan Young
-" Last Modified:  Aug 26, 2022
+" Last Modified:  Oct 27, 2022
 
 " Disable startup welcome screen
 set shm+=I
